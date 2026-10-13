@@ -20,8 +20,7 @@
       <div class="leaf-line leaf-line-hero" aria-hidden="true"></div>
 
       <div class="hero__copy reveal">
-        <p class="eyebrow">ПРИГЛАШЕНИЕ НА СВАДЬБУ</p>
-        <h1>Рома <span>&amp;</span> Тома</h1>
+        <h1>Рома<br><span>&amp;</span> Тома</h1>
         <p class="hero__date">26–27 февраля 2027</p>
         <p class="hero__lead">Сохраните даты для нашего торжества!</p>
         <a class="scroll-cue" href="#main" aria-label="Перейти к приглашению">↓</a>
@@ -38,7 +37,6 @@
       <div class="decor decor-main decor-main-b" aria-hidden="true"></div>
       <div class="swoop swoop-main" aria-hidden="true"></div>
       <div class="main-intro__inner reveal">
-        <p class="section-kicker">ПРИГЛАШЕНИЕ НА СВАДЬБУ</p>
         <h2>Дорогие наши близкие и друзья!</h2>
         <p class="body-copy">
           Мы рады сообщить вам, что мы решили скрепить наш союз узами брака.
@@ -130,9 +128,9 @@
       </div>
 
       <div class="photo-strip photo-strip--registry reveal">
-        <img src="images/dvbrakosoch_3.jpg" alt="Дворец бракосочетания">
-        <img src="images/dvbrakosoch_2.jpg" alt="Интерьер дворца">
-        <img src="images/dvbrakosoch_1.jpg" alt="Фасад дворца">
+        <figure class="lace-frame"><img src="images/dvbrakosoch_3.jpg" alt="Дворец бракосочетания"></figure>
+        <figure class="lace-frame"><img src="images/dvbrakosoch_2.jpg" alt="Интерьер дворца"></figure>
+        <figure class="lace-frame"><img src="images/dvbrakosoch_1.jpg" alt="Фасад дворца"></figure>
       </div>
     </section>
 
@@ -173,9 +171,9 @@
       </div>
 
       <div class="photo-strip photo-strip--banquet reveal">
-        <img src="images/strmelnik_1.1.jpg" alt="Старая Мельница">
-        <img src="images/strmelnik_2.jpg" alt="Банкетный зал">
-        <img src="images/strmelnik_4.jpg" alt="Банкетный зал">
+        <figure class="lace-frame"><img src="images/strmelnik_1.1.jpg" alt="Старая Мельница"></figure>
+        <figure class="lace-frame"><img src="images/strmelnik_2.jpg" alt="Банкетный зал"></figure>
+        <figure class="lace-frame"><img src="images/strmelnik_4.jpg" alt="Банкетный зал"></figure>
       </div>
     </section>
 
@@ -185,7 +183,6 @@
       <div class="decor details-decor details-decor-b" aria-hidden="true"></div>
 
       <div class="details__inner reveal">
-        <p class="section-kicker">ПОДРОБНОСТИ</p>
         <h2>Детали</h2>
 
         <div class="details-block">
@@ -198,7 +195,7 @@
           <img class="map-image" src="images/MapMill.png" alt="Схема расположения базы отдыха «Старая Мельница»">
 
           <a class="detail-link" href="https://maps.app.goo.gl/sdqg6JwnJCSYYrJ97" target="_blank" rel="noopener">Место ожидания трансфера ↗</a>
-          <img class="map-image map-image--small" src="images/MapTransp.png" alt="Схема места ожидания трансфера">
+          <img class="map-image" src="images/MapTransp.png" alt="Схема места ожидания трансфера">
 
           <p class="subline">Расписание электричек:</p>
           <div class="detail-list detail-list--left">
@@ -251,11 +248,12 @@
               <input id="guest-name" name="name" type="text" autocomplete="name" placeholder="Напишите имя" required>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="attendance-fieldset">
               <legend>Присоединитесь ли вы к нам?</legend>
-              <label><input type="radio" name="attendance" value="26 февраля (ЗАГС)" required> <span>26 февраля (ЗАГС)</span></label>
-              <label><input type="radio" name="attendance" value="27 февраля (Банкет)"> <span>27 февраля (Банкет)</span></label>
-              <label><input type="radio" name="attendance" value="К сожалению, не смогу"> <span>К сожалению, не смогу</span></label>
+              <p class="question-hint">Можно выбрать один или оба дня. Последний вариант — отдельно.</p>
+              <label><input type="checkbox" name="attendance" value="26 февраля (ЗАГС)" data-attendance="day"> <span>26 февраля (ЗАГС)</span></label>
+              <label><input type="checkbox" name="attendance" value="27 февраля (Банкет)" data-attendance="day"> <span>27 февраля (Банкет)</span></label>
+              <label><input type="checkbox" name="attendance" value="К сожалению, не смогу" data-attendance="decline"> <span>К сожалению, не смогу</span></label>
             </fieldset>
 
             <fieldset>
@@ -268,6 +266,18 @@
               <legend>Нужен ли вам трансфер в день банкета?</legend>
               <label><input type="radio" name="transfer" value="Да, нужен" required> <span>Да, нужен</span></label>
               <label><input type="radio" name="transfer" value="Нет, не нужен"> <span>Нет, не нужен</span></label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Ваши предпочтения по напиткам:</legend>
+              <p class="question-hint">Можно выбрать несколько вариантов.</p>
+              <label><input type="checkbox" name="drinks" value="Вода / минеральная вода"> <span>Вода / минеральная вода</span></label>
+              <label><input type="checkbox" name="drinks" value="Соки и лимонады"> <span>Соки и лимонады</span></label>
+              <label><input type="checkbox" name="drinks" value="Чай / кофе"> <span>Чай / кофе</span></label>
+              <label><input type="checkbox" name="drinks" value="Вино"> <span>Вино</span></label>
+              <label><input type="checkbox" name="drinks" value="Пиво"> <span>Пиво</span></label>
+              <label><input type="checkbox" name="drinks" value="Крепкие напитки"> <span>Крепкие напитки</span></label>
+              <label><input type="checkbox" name="drinks" value="Безалкогольные коктейли"> <span>Безалкогольные коктейли</span></label>
             </fieldset>
 
             <fieldset>
@@ -298,7 +308,7 @@
       </div>
       <div class="footer__content reveal">
         <h2>С нетерпением<br>ждём встречи!</h2>
-        <p>Рома &amp; Тома</p>
+        <p>Рома ♡ Тома</p>
       </div>
       <img class="footer-tulip" src="images/One_red_tulip.png" alt="" aria-hidden="true">
     </footer>
