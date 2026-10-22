@@ -6,7 +6,7 @@
 (() => {
   "use strict";
 
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWg2UBXi1Azynl-4I6HWX2wCIkIfhHPfbMYBMlI094jT3vjXYwpc1cwerMmSvu3KXq4g/exec"; // Example: https://script.google.com/macros/s/DEPLOYMENT_ID/exec
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyR1C7wJycqJynC3PTH-xHTQH3SD_qeUduggcram5ipf7fzGV5EleZRRiGUkeSWgXDNg/exec"; // Example: https://script.google.com/macros/s/DEPLOYMENT_ID/exec
   document.documentElement.classList.add("js-enabled");
 
   // Soft reveal animations. If IntersectionObserver is unavailable, content remains visible.
