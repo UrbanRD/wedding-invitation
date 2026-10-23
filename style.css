@@ -161,7 +161,7 @@ button, input, textarea, select { color-scheme: light; }
 }
 .date-highlight::before {
   content: ""; position: absolute; z-index: -1; inset: -17% -24%;
-  background: url("images/paints/lime_1.png") center / 100% 100% no-repeat;
+  background: url("images/paints/lime_1.webp") center / 100% 100% no-repeat;
 }
 .date-highlight-red { color: var(--weekend-red); }
 .calendar-events { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
@@ -474,4 +474,207 @@ button, input, textarea, select { color-scheme: light; }
   .frame-mobile-left, .frame-mobile-right { top: 70px; bottom: 70px; width: clamp(58px, 18vw, 76px); height: calc(100% - 140px); object-fit: cover; }
   .frame-mobile-left { left: -1.5%; }
   .frame-mobile-right { right: -1.5%; }
+}
+
+
+
+/* =========================================
+   ФИНАЛЬНЫЕ ПРАВКИ И АДАПТАЦИЯ
+   ========================================= */
+
+/* Навигация — по центру, без названия слева */
+.site-header {
+  justify-content: center;
+}
+
+.brand {
+  display: none;
+}
+
+.main-nav {
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Календарь: отдельные мазки для 26 и 27 февраля */
+.date-highlight {
+  color: var(--chocolate);
+  text-decoration: underline;
+  text-decoration-color: var(--chocolate);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+
+.date-highlight::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -17% -24%;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.date-highlight-blue::before {
+  background-image: url("images/paints/blue_1.webp");
+  transform: rotate(15deg);
+}
+
+.date-highlight-lime::before {
+  background-image: url("images/paints/lime_1.webp");
+  transform: rotate(15deg);
+}
+
+.date-highlight-blue,
+.date-highlight-lime {
+  color: var(--chocolate);
+}
+
+/* Блоки 1 и 2 — меньше пустого пространства */
+.hero {
+  min-height: clamp(540px, calc(100svh - 76px), 760px);
+}
+
+.intro.section-padded {
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* Подпись «Спасибо за понимание» */
+.thanks-note {
+  margin-block: .4rem !important;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* Палитра дресс-кода: увеличить на 15% и сдвинуть вправо */
+.palette-image {
+  flex-basis: clamp(178px, 28.75vw, 345px);
+  width: clamp(178px, 28.75vw, 345px);
+  max-height: 310px;
+  margin-left: auto;
+  transform: translateX(12%);
+}
+
+/* Анкета — сократить интервалы сверху и снизу */
+.details-content > .detail-topic:last-child {
+  margin-bottom: 1.5rem;
+}
+
+.rsvp-section {
+  padding-top: .75rem;
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.rsvp-shell {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* Мобильная версия */
+@media (max-width: 900px) {
+  .site-header {
+    justify-content: center;
+  }
+
+  .main-nav {
+    justify-content: center;
+    gap: clamp(.7rem, 2vw, 1.2rem);
+  }
+}
+
+@media (max-width: 640px) {
+  /* Компактная центральная навигация */
+  .site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    min-height: auto;
+    padding: .55rem .5rem;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .main-nav {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .25rem .85rem;
+    overflow: visible;
+    padding: .2rem 0;
+  }
+
+  .main-nav a {
+    flex: 0 1 auto;
+    font-size: .75rem;
+    letter-spacing: .025em;
+  }
+
+  html {
+    scroll-padding-top: 70px;
+  }
+
+  /* Убираем излишние отступы между первым и вторым блоками */
+  .hero {
+    min-height: clamp(520px, 82svh, 630px);
+    padding-bottom: 2.5rem;
+  }
+
+  .intro.section-padded {
+    padding: 2.8rem 1.15rem 3.2rem;
+  }
+
+  /* Палитра не выходит за край экрана */
+  .dresscode-topic {
+    overflow: visible;
+  }
+
+  .palette-image {
+    width: min(82%, 280px);
+    flex-basis: auto;
+    max-height: 250px;
+    margin: .8rem 0 0 auto;
+    transform: none;
+  }
+
+  /* Компактнее переход к анкете */
+  .details-content > .detail-topic:last-child {
+    margin-bottom: 1.2rem;
+  }
+
+  .rsvp-section {
+    padding: .5rem .25rem 2.5rem;
+  }
+
+  .rsvp-shell {
+    padding: 3rem 6vw;
+  }
+}
+
+@media (max-width: 380px) {
+  .main-nav {
+    column-gap: .6rem;
+  }
+
+  .main-nav a {
+    font-size: .7rem;
+  }
+
+  .intro.section-padded {
+    padding-inline: 1rem;
+  }
+
+  .rsvp-shell {
+    padding-inline: 4vw;
+  }
+}
+
+/* 27 февраля — красный текст */
+.date-highlight-lime {
+  color: #c62828;
+  text-decoration-color: #c62828;
 }

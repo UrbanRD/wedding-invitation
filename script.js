@@ -5,7 +5,6 @@
 */
 (() => {
   "use strict";
-
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyR1C7wJycqJynC3PTH-xHTQH3SD_qeUduggcram5ipf7fzGV5EleZRRiGUkeSWgXDNg/exec"; // Example: https://script.google.com/macros/s/DEPLOYMENT_ID/exec
   document.documentElement.classList.add("js-enabled");
 
