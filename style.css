@@ -161,7 +161,7 @@ button, input, textarea, select { color-scheme: light; }
 }
 .date-highlight::before {
   content: ""; position: absolute; z-index: -1; inset: -17% -24%;
-  background: url("images/paints/lime_1.webp") center / 100% 100% no-repeat;
+  background: url("images/paints/lime_1.png") center / 100% 100% no-repeat;
 }
 .date-highlight-red { color: var(--weekend-red); }
 .calendar-events { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
@@ -207,18 +207,19 @@ button, input, textarea, select { color-scheme: light; }
 .registry-paint-bottom .paint:nth-child(3) { right: 3%; transform: rotate(-8deg); }
 
 .banquet-section { color: var(--cream); }
-.banquet-paint-cluster { position: absolute; z-index: -1; right: -2%; top: 3%; width: clamp(190px, 25vw, 360px); height: clamp(240px, 35vw, 450px); }
-.banquet-paint-cluster .paint { width: 70%; height: 78%; object-fit: fill; }
-.banquet-paint-creme { left: -3%; top: 0; transform: rotate(-18deg); }
-.banquet-paint-lime { left: 27%; top: 15%; transform: rotate(12deg); }
-.banquet-paint-light { right: -3%; bottom: -5%; transform: rotate(21deg); }
+.banquet-paint-cluster { position: absolute; z-index: -1; right: 0%; top: 2%; width: clamp(250px, 35vw, 500px); height: clamp(340px, 45vw, 650px); }
+.banquet-paint-cluster .paint { object-fit: fill; }
+.banquet-paint-creme { width: 14%; height: 47%; left: 10%; bottom: 10%; transform: rotate(159deg); }
+.banquet-paint-blue { width: 20%; height: 65%; left: 3%; bottom: 6%; transform: rotate(162deg); }
+.banquet-paint-light1 { width: 23%; height: 70%; left: -8%; bottom: 4%; transform: rotate(150deg); }
+.banquet-paint-light2 { width: 22%; height: 80%; left: 10%; bottom: 5%; transform: rotate(170deg); }
 .banquet-content .event-heading { max-width: 930px; }
 .banquet-content .address-link { color: var(--cream); }
 .banquet-icons .icon-tile { border-color: var(--cream); }
 .banquet-icons .icon-tile img { filter: brightness(0) saturate(100%) invert(99%) sepia(12%) saturate(631%) hue-rotate(342deg) brightness(103%) contrast(104%); }
 .banquet-schedule { max-width: 860px; }
 .banquet-schedule .schedule-list > div { grid-template-columns: minmax(100px, .34fr) 1fr; }
-.schedule-flowers { position: absolute; width: clamp(110px, 17vw, 220px); right: -24%; top: 2.2rem; transform: rotate(9deg); pointer-events: none; }
+.schedule-flowers { position: absolute; width: clamp(300px, 40vw, 500px); right: -40%; top: -20%; transform: rotate(0deg); pointer-events: none; }
 .banquet-gallery img { height: clamp(210px, 29vw, 370px); }
 
 /* 6 — details */
@@ -236,27 +237,26 @@ button, input, textarea, select { color-scheme: light; }
 .map-card img { width: 100%; height: clamp(190px, 24vw, 310px); object-fit: cover; }
 .map-open { font-size: .88rem; text-decoration: underline; text-underline-offset: .18em; }
 .train-link { display: block; position: relative; z-index: 2; margin-top: 1.1rem; text-align: right; font-size: .95em; }
-.transfer-paint { width: clamp(75px, 9vw, 145px); height: 57%; right: -8%; top: 23%; object-fit: fill; transform: rotate(-4deg); }
+.transfer-paint { width: clamp(75px, 9vw, 145px); height: 63%; right: -15%; top: 23%; object-fit: fill; transform: rotate(0deg); }
 .dresscode-topic { align-items: center; padding-right: clamp(130px, 26vw, 310px); min-height: 240px; }
 .palette-image { flex: 0 0 clamp(155px, 25vw, 300px); width: clamp(155px, 25vw, 300px); max-height: 270px; object-fit: contain; }
-.dresscode-paint { width: 145px; height: 250px; right: 1%; top: -20%; object-fit: fill; transform: rotate(12deg); z-index: -1; }
 .gifts-topic { padding-right: clamp(110px, 23vw, 265px); min-height: 200px; }
 .detail-icon { flex: 0 0 auto; width: clamp(76px, 10vw, 125px); height: clamp(76px, 10vw, 125px); object-fit: contain; }
-.gift-icon { position: absolute; right: 8%; top: 8%; z-index: 2; }
-.gift-blue-paint { right: -1%; top: -25%; width: 115px; height: 260px; object-fit: fill; transform: rotate(3deg); }
-.gift-red-paint { right: 12%; bottom: -8%; width: 190px; height: 65px; object-fit: fill; transform: rotate(-4deg); }
+.gift-icon { position: absolute; right: 8%; top: 25%; z-index: 2; }
+.gift-blue-paint { right: 0%; top: -5%; width: 65px; height: 330px; object-fit: fill; transform: rotate(0deg); }
+.gift-red-paint { right: 7%; bottom: 15%; width: 230px; height: 23px; object-fit: fill; transform: rotate(180deg); }
 .inline-link { display: inline-block; font-family: var(--heading-font); text-underline-offset: .2em; }
 .overnight-topic { padding-right: clamp(110px, 23vw, 265px); min-height: 230px; }
 .bed-icon { position: absolute; right: 8%; top: 21%; z-index: 2; }
-.overnight-paint-top, .overnight-paint-bottom { right: -3%; width: 180px; height: 72px; object-fit: fill; }
-.overnight-paint-top { top: 0; transform: rotate(6deg); }
-.overnight-paint-bottom { bottom: 0; transform: rotate(-6deg) scaleX(-1); }
-.thanks-note { text-align: center; }
+.overnight-paint-top, .overnight-paint-bottom { right: 7%; width: 120px; height: 200px; object-fit: fill; }
+.overnight-paint-top { top: -25%; transform: rotate(90deg) scaleX(-1); }
+.overnight-paint-bottom { bottom: -8%; right: 9%; width: 120px; height: 200px; transform: rotate(-90deg) scaleX(-1); object-fit: ill; }
+
 
 /* 7 — RSVP form framed with the supplied floral collage */
 .rsvp-section { position: relative; padding: clamp(1rem, 3vw, 3rem) clamp(.5rem, 2vw, 2rem) clamp(5rem, 9vw, 9rem); overflow: clip; }
 .rsvp-shell { position: relative; width: min(100%, 1100px); margin-inline: auto; padding: clamp(5rem, 9vw, 8rem) clamp(12rem, 23vw, 17rem); isolation: isolate; }
-.rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 .rsvp-card { position: relative; width: 100%; max-width: 650px; margin: 0 auto; padding: clamp(1.3rem, 2.7vw, 2.7rem); color: var(--cream); background: var(--chocolate); border-radius: 22px; }
 .rsvp-card h2 { margin: 0 0 1.8rem; padding: .05em .2em .1em; color: var(--chocolate); background: var(--cream); border: 2px solid var(--cream); border-radius: 11px; font-family: var(--heading-font); font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 400; line-height: 1.05; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
 .question { min-width: 0; margin: 0 0 1.55rem; padding: 0; border: 0; }
@@ -299,7 +299,7 @@ button, input, textarea, select { color-scheme: light; }
 .footer-copy .detail-title { margin-bottom: .5rem; }
 .footer-copy p { margin: .4rem 0; text-align: center; }
 .question-icon { width: clamp(90px, 11vw, 145px); height: clamp(90px, 11vw, 145px); }
-.footer-paint { z-index: -1; left: -10%; bottom: -16%; width: 58%; height: 90px; object-fit: fill; transform: rotate(-2deg); }
+.footer-paint { z-index: -1; left: -20%; top: -255%; width: 16%; height: 440%; object-fit: fill; transform: rotate(90deg); }
 .footer-closing { position: relative; z-index: 2; margin: clamp(3rem, 6vw, 5rem) 0 1.2rem; text-align: center; font-family: var(--heading-font); font-size: clamp(2rem, 3.8vw, 3.8rem); }
 .footer-signature { position: relative; z-index: 2; margin: 0; text-align: center; font-family: var(--heading-font); font-size: clamp(2.1rem, 4.8vw, 4.8rem); line-height: 1.1; }
 .bouquet-collage { position: absolute; z-index: 1; left: 0; right: 0; bottom: -7rem; height: clamp(300px, 32vw, 460px); pointer-events: none; }
