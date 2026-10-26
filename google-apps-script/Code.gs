@@ -3,7 +3,7 @@
  * Deploy this file as a Google Apps Script web app that executes as the owner.
  * The Drive folder ID below comes from the folder link in content.docx.
  */
-const RSVP_FOLDER_ID = '1G8f_wZZsQrlMPmbcRN47xF4OuoplB_Zc';
+const RSVP_FOLDER_ID = 'https://drive.google.com/drive/folders/1G8f_wZZsQrlMPmbcRN47xF4OuoplB_Zc';
 
 function doGet() {
   return ContentService.createTextOutput('RSVP endpoint is running.').setMimeType(ContentService.MimeType.TEXT);
@@ -65,3 +65,5 @@ function jsonResponse(data) {
     .createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+

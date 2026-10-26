@@ -678,3 +678,130 @@ button, input, textarea, select { color-scheme: light; }
   color: #c62828;
   text-decoration-color: #c62828;
 }
+
+
+
+/* ===== Final polish: consistent composition, gradients and flower parallax ===== */
+:root { color-scheme: only light; }
+html { background: #FFFBE9; }
+body { background-color: #FFFBE9; }
+
+/* A soft painted transition between adjacent sections with different base colors */
+.event-section, .details-section, .rsvp-section, .site-footer { position: relative; }
+.intro::after, .calendar-section::after, .registry-section::after,
+.banquet-section::after, .details-section::after, .rsvp-section::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  left: 0; right: 0; bottom: -1px;
+  height: clamp(34px, 5vw, 76px);
+  background: linear-gradient(to bottom, rgba(255,251,233,0), rgba(255,251,233,.68));
+}
+.registry-section::after {
+  background: linear-gradient(to bottom, rgba(196,229,255,0), rgba(134,153,242,.28));
+}
+.banquet-section::after {
+  background: linear-gradient(to bottom, rgba(134,153,242,0), rgba(255,251,233,.62));
+}
+.intro > *, .calendar-section > *, .event-section > *,
+.details-section > *, .rsvp-section > * { position: relative; z-index: 1; }
+
+/* Company illustration to the right of the dress-code copy */
+.dresscode-topic {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, 19vw) minmax(120px, 17vw);
+  align-items: center;
+  gap: clamp(.75rem, 2vw, 1.6rem);
+  padding-right: 0;
+  min-height: 0;
+}
+.company-image {
+  display: block;
+  width: 100%;
+  max-width: 230px;
+  max-height: 350px;
+  justify-self: end;
+  object-fit: contain;
+}
+.palette-image {
+  width: 100%;
+  max-width: 205px;
+  flex-basis: auto;
+  max-height: 280px;
+  justify-self: end;
+  margin-left: 0;
+  transform: translateX(5%);
+}
+
+/* One single footer collage, overlapping the bottom edge */
+.bouquet-collage {
+  left: 0; right: 0; bottom: -4rem;
+  height: clamp(260px, 35vw, 500px);
+  overflow: visible;
+}
+.footer-foot {
+  position: absolute;
+  left: 50%;
+  bottom: -3.5rem;
+  display: block;
+  width: min(100%, 1500px);
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0;
+  translate: -50% 35px;
+  transition: opacity 1.4s ease, translate 1.8s cubic-bezier(.2,.7,.25,1);
+}
+.site-footer.is-visible .footer-foot { opacity: 1; translate: -50% var(--parallax-y, 0px); }
+
+/* Make the RSVP floral frame visibly larger without changing the form */
+.rsvp-shell { width: min(100%, 1180px); }
+.rsvp-frame-desktop { transform: scale(1.12); transform-origin: center center; }
+.rsvp-frame-mobile { transform: scale(1.12); transform-origin: center center; }
+
+/* Slow, subtle parallax on flower illustrations relative to the page */
+img[src*="bouqette"], .calendar-tulips {
+  translate: 0 var(--parallax-y, 0px);
+  will-change: translate;
+}
+
+/* Keep the same relative composition on narrow screens; scale, don't reorder */
+@media (max-width: 640px) {
+  .dresscode-topic {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(82px, 26vw);
+    grid-template-areas: "copy company" "palette palette";
+    gap: .65rem .8rem;
+    align-items: center;
+    padding: 0;
+  }
+  .dresscode-topic .detail-copy { grid-area: copy; min-width: 0; }
+  .company-image {
+    grid-area: company;
+    width: 100%;
+    max-width: 125px;
+    max-height: 190px;
+    justify-self: end;
+  }
+  .palette-image {
+    grid-area: palette;
+    width: min(72%, 220px);
+    max-width: none;
+    max-height: 180px;
+    justify-self: end;
+    margin: -.1rem 0 0;
+    transform: none;
+  }
+  .rsvp-shell { width: 100%; }
+  .rsvp-frame-desktop { transform: none; }
+  .rsvp-frame-mobile { transform: scale(1.08); }
+  .bouquet-collage { height: 250px; bottom: -2.5rem; }
+  .footer-foot { width: 125%; max-width: none; bottom: -2.5rem; }
+}
+@media (max-width: 380px) {
+  .dresscode-topic { grid-template-columns: minmax(0, 1fr) 76px; }
+  .company-image { max-height: 150px; }
+  .palette-image { width: 68%; }
+}

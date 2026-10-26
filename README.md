@@ -1,17 +1,57 @@
-# Рома & Тома — свадебное приглашение
+# Свадебное приглашение — новая версия
 
-Это адаптивный статический сайт: HTML + CSS + JavaScript.
+Статический сайт для GitHub Pages. Проект собран по материалам `content.docx` и `references/ref.pdf` из предоставленного архива, без использования исходных макетов предыдущей версии.
 
-## Быстрый просмотр
-Откройте `index.html` в браузере. Для проверки мобильной версии можно использовать режим эмуляции устройства в инструментах разработчика.
+## Файлы
 
-## Структура
-- `index.html` — структура страницы
-- `style.css` — стили и адаптив
-- `script.js` — анимации и логика анкеты
-- `images/` — изображения сайта
-- `references/` — референсы
+- `index.html` — структура всех 8 блоков.
+- `style.css` — оформление для широкого экрана и телефона. Палитра фиксирована, используется `color-scheme: only light`, поэтому оформление не должно инвертироваться при включении тёмной темы браузера/Android.
+- `script.js` — анимации появления, валидация анкеты и взаимное исключение ответов.
+- `images/` — оптимизированные WebP-версии фотографий, иконок, букетов, мазков гуаши, карты и цветочной рамки.
+- `fonts/` — предоставленные шрифты Cormorant SC и Barkentina 1.
+- `google-apps-script/Code.gs` — заготовка обработчика для сохранения анкет в указанную папку Google Drive.
 
-## Анкета
-Сейчас анкета работает в демо-режиме: ответы сохраняются в LocalStorage браузера.
-Для реального сохранения в Google Drive нужно развернуть небольшой Google Apps Script и указать URL веб-приложения в `FORM_ENDPOINT` в `script.js`.
+Исходные изображения высокой детализации оптимизированы для браузера: проект занимает несколько мегабайт вместо более 500 МБ исходного архива.
+
+## Проверка локально
+
+Откройте терминал в этой папке и выполните одну из команд:
+
+```bash
+python -m http.server 8000
+```
+
+или на Windows:
+
+```bat
+py -m http.server 8000
+```
+
+Откройте `http://localhost:8000`. Чтобы проверить с телефона в той же Wi-Fi сети, используйте локальный IPv4-адрес компьютера вместо `localhost`, например `http://192.168.1.50:8000`.
+
+## Обновление на GitHub Pages
+
+Загрузите содержимое этой папки (не сам ZIP) в корень существующего репозитория Pages: `index.html`, `style.css`, `script.js`, папки `images/` и `fonts/`. После `Commit changes` GitHub Pages автоматически обновит сайт.
+
+## Подключение ответов анкеты к Google Drive
+
+До настройки веб-приложения форма проверяет обязательные поля и комбинации ответов, но не отправляет данные никуда. В `script.js` нужно будет вставить URL веб-приложения Apps Script в переменную `APPS_SCRIPT_URL`.
+
+1. Откройте [script.google.com](https://script.google.com/) под аккаунтом, имеющим доступ к папке Google Drive из описания проекта.
+2. Создайте новый проект и замените содержимое `Code.gs` кодом из `google-apps-script/Code.gs`.
+3. Убедитесь, что `RSVP_FOLDER_ID` указывает на нужную папку. Сейчас в файле стоит ID из предоставленного `content.docx`.
+4. Нажмите **Deploy → New deployment → Web app**.
+5. Выберите **Execute as: Me**. Для публичной формы гостей в пункте **Who has access** выберите доступ для всех, кто будет заполнять анкету (вариант `Anyone`, если он доступен в вашем аккаунте). Подтвердите необходимые разрешения Drive.
+6. Скопируйте URL веб-приложения, оканчивающийся на `/exec`, и вставьте его в строку `const APPS_SCRIPT_URL = "";` файла `script.js`.
+7. Сохраните `script.js` в репозитории и проверьте тестовую отправку. В папке Drive должен появиться текстовый файл с именем гостя; внутри будут записаны вопросы и ответы.
+
+Поскольку веб-приложение принимает общедоступные POST-запросы, адрес отправки не следует считать закрытым API. При необходимости до рассылки гостям можно добавить дополнительную защиту от спама.
+
+
+## Final visual update
+
+- Added the `company.png` illustration beside the dress-code text.
+- Replaced the separate footer bouquet elements with one transparent composite image, `images/foot.webp`, assembled from the bouquet assets included in the archive (the original archive did not contain a separate `foot` asset).
+- Increased the RSVP frame scale and added soft gradient transitions between colored sections.
+- Added subtle scroll parallax to the flower illustrations.
+- Updated the dress-code layout for narrow screens while retaining the same content order and visual hierarchy.

@@ -39,6 +39,26 @@
     document.querySelector(".site-footer")?.classList.add("is-visible");
   }
 
+  // Gentle flower parallax: flowers move a little less than the page on scroll.
+  const parallaxFlowers = document.querySelectorAll('img[src*="bouqette"], .calendar-tulips, .footer-foot');
+  let parallaxFrame = 0;
+  const updateFlowerParallax = () => {
+    if (parallaxFrame) return;
+    parallaxFrame = window.requestAnimationFrame(() => {
+      const scrollY = window.scrollY || 0;
+      parallaxFlowers.forEach((img) => {
+        const rect = img.getBoundingClientRect();
+        const centerFromViewport = rect.top + rect.height / 2 - window.innerHeight / 2;
+        const offset = Math.max(-22, Math.min(22, -centerFromViewport * 0.035));
+        img.style.setProperty("--parallax-y", `${offset.toFixed(1)}px`);
+      });
+      parallaxFrame = 0;
+    });
+  };
+  window.addEventListener("scroll", updateFlowerParallax, { passive: true });
+  window.addEventListener("resize", updateFlowerParallax, { passive: true });
+  updateFlowerParallax();
+
   const form = document.getElementById("rsvpForm");
   const status = document.getElementById("formStatus");
   if (!form || !status) return;
