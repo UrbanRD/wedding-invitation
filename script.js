@@ -8,6 +8,29 @@
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyR1C7wJycqJynC3PTH-xHTQH3SD_qeUduggcram5ipf7fzGV5EleZRRiGUkeSWgXDNg/exec"; // Example: https://script.google.com/macros/s/DEPLOYMENT_ID/exec
   document.documentElement.classList.add("js-enabled");
 
+  // Subtle scroll parallax: floral images drift a little slower than the page.
+  const floralImages = document.querySelectorAll(
+    '.hero-tulip, .calendar-tulips, .registry-bouquet, .schedule-flowers, .footer-foot, img[src*="bouqette"], img[src*="three-tulips"]'
+  );
+  let parallaxFrame = 0;
+  const updateFloralParallax = () => {
+    if (parallaxFrame) return;
+    parallaxFrame = window.requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion) {
+        floralImages.forEach((image) => {
+          const rect = image.getBoundingClientRect();
+          const distance = (rect.top + rect.height / 2 - window.innerHeight / 2) * -0.035;
+          image.style.translate = `0 ${Math.max(-24, Math.min(24, distance)).toFixed(1)}px`;
+        });
+      }
+      parallaxFrame = 0;
+    });
+  };
+  window.addEventListener("scroll", updateFloralParallax, { passive: true });
+  window.addEventListener("resize", updateFloralParallax, { passive: true });
+  updateFloralParallax();
+
   // Soft reveal animations. If IntersectionObserver is unavailable, content remains visible.
   const revealElements = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
@@ -38,26 +61,6 @@
     revealElements.forEach((element) => element.classList.add("is-visible"));
     document.querySelector(".site-footer")?.classList.add("is-visible");
   }
-
-  // Gentle flower parallax: flowers move a little less than the page on scroll.
-  const parallaxFlowers = document.querySelectorAll('img[src*="bouqette"], .calendar-tulips, .footer-foot');
-  let parallaxFrame = 0;
-  const updateFlowerParallax = () => {
-    if (parallaxFrame) return;
-    parallaxFrame = window.requestAnimationFrame(() => {
-      const scrollY = window.scrollY || 0;
-      parallaxFlowers.forEach((img) => {
-        const rect = img.getBoundingClientRect();
-        const centerFromViewport = rect.top + rect.height / 2 - window.innerHeight / 2;
-        const offset = Math.max(-22, Math.min(22, -centerFromViewport * 0.035));
-        img.style.setProperty("--parallax-y", `${offset.toFixed(1)}px`);
-      });
-      parallaxFrame = 0;
-    });
-  };
-  window.addEventListener("scroll", updateFlowerParallax, { passive: true });
-  window.addEventListener("resize", updateFlowerParallax, { passive: true });
-  updateFlowerParallax();
 
   const form = document.getElementById("rsvpForm");
   const status = document.getElementById("formStatus");

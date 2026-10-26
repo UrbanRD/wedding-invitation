@@ -256,7 +256,7 @@ button, input, textarea, select { color-scheme: light; }
 /* 7 — RSVP form framed with the supplied floral collage */
 .rsvp-section { position: relative; padding: clamp(1rem, 3vw, 3rem) clamp(.5rem, 2vw, 2rem) clamp(5rem, 9vw, 9rem); overflow: clip; }
 .rsvp-shell { position: relative; width: min(100%, 1100px); margin-inline: auto; padding: clamp(5rem, 9vw, 8rem) clamp(12rem, 23vw, 17rem); isolation: isolate; }
-.rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; transform: scale(1.2); }
 .rsvp-card { position: relative; width: 100%; max-width: 650px; margin: 0 auto; padding: clamp(1.3rem, 2.7vw, 2.7rem); color: var(--cream); background: var(--chocolate); border-radius: 22px; }
 .rsvp-card h2 { margin: 0 0 1.8rem; padding: .05em .2em .1em; color: var(--chocolate); background: var(--cream); border: 2px solid var(--cream); border-radius: 11px; font-family: var(--heading-font); font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 400; line-height: 1.05; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
 .question { min-width: 0; margin: 0 0 1.55rem; padding: 0; border: 0; }
@@ -468,10 +468,10 @@ button, input, textarea, select { color-scheme: light; }
   .rsvp-frame-desktop { display: none; }
   .rsvp-frame-mobile { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
   .frame-mobile-edge { position: absolute; display: block; max-width: none; pointer-events: none; }
-  .frame-mobile-top, .frame-mobile-bottom { left: -3%; width: 106%; height: auto; }
+  .frame-mobile-top, .frame-mobile-bottom { left: -8%; width: 116%; height: auto; }
   .frame-mobile-top { top: 0; }
   .frame-mobile-bottom { bottom: 0; }
-  .frame-mobile-left, .frame-mobile-right { top: 70px; bottom: 70px; width: clamp(58px, 18vw, 76px); height: calc(100% - 140px); object-fit: cover; }
+  .frame-mobile-left, .frame-mobile-right { top: 55px; bottom: 55px; width: clamp(68px, 21vw, 88px); height: calc(100% - 110px); object-fit: cover; }
   .frame-mobile-left { left: -1.5%; }
   .frame-mobile-right { right: -1.5%; }
 }
@@ -680,128 +680,55 @@ button, input, textarea, select { color-scheme: light; }
 }
 
 
-
-/* ===== Final polish: consistent composition, gradients and flower parallax ===== */
-:root { color-scheme: only light; }
-html { background: #FFFBE9; }
-body { background-color: #FFFBE9; }
-
-/* A soft painted transition between adjacent sections with different base colors */
-.event-section, .details-section, .rsvp-section, .site-footer { position: relative; }
-.intro::after, .calendar-section::after, .registry-section::after,
-.banquet-section::after, .details-section::after, .rsvp-section::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  left: 0; right: 0; bottom: -1px;
-  height: clamp(34px, 5vw, 76px);
-  background: linear-gradient(to bottom, rgba(255,251,233,0), rgba(255,251,233,.68));
-}
-.registry-section::after {
-  background: linear-gradient(to bottom, rgba(196,229,255,0), rgba(134,153,242,.28));
-}
-.banquet-section::after {
-  background: linear-gradient(to bottom, rgba(134,153,242,0), rgba(255,251,233,.62));
-}
-.intro > *, .calendar-section > *, .event-section > *,
-.details-section > *, .rsvp-section > * { position: relative; z-index: 1; }
-
-/* Company illustration to the right of the dress-code copy */
-.dresscode-topic {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(120px, 19vw) minmax(120px, 17vw);
-  align-items: center;
-  gap: clamp(.75rem, 2vw, 1.6rem);
-  padding-right: 0;
-  min-height: 0;
-}
+/* Final visual refinements: supplied company art, single footer collage,
+   gentle section fades and subtle flower parallax. */
 .company-image {
-  display: block;
-  width: 100%;
-  max-width: 230px;
-  max-height: 350px;
-  justify-self: end;
+  position: absolute;
+  z-index: 1;
+  right: -1.5%;
+  top: 50%;
+  width: clamp(105px, 13vw, 175px);
+  max-height: 230px;
   object-fit: contain;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
-.palette-image {
-  width: 100%;
-  max-width: 205px;
-  flex-basis: auto;
-  max-height: 280px;
-  justify-self: end;
-  margin-left: 0;
-  transform: translateX(5%);
-}
+.dresscode-topic { padding-right: clamp(125px, 17vw, 220px); }
+.palette-image { margin-left: auto; transform: translateX(10%) scale(1.15); transform-origin: center right; }
 
-/* One single footer collage, overlapping the bottom edge */
-.bouquet-collage {
-  left: 0; right: 0; bottom: -4rem;
-  height: clamp(260px, 35vw, 500px);
-  overflow: visible;
-}
+/* One unified footer image replaces the separate bouquet elements. */
+.bouquet-collage { bottom: -8rem; height: clamp(280px, 32vw, 450px); }
 .footer-foot {
   position: absolute;
   left: 50%;
-  bottom: -3.5rem;
-  display: block;
-  width: min(100%, 1500px);
-  height: 100%;
+  bottom: -2%;
+  width: min(112%, 1800px);
   max-width: none;
+  height: 100%;
   object-fit: contain;
   object-position: center bottom;
-  opacity: 0;
-  translate: -50% 35px;
-  transition: opacity 1.4s ease, translate 1.8s cubic-bezier(.2,.7,.25,1);
-}
-.site-footer.is-visible .footer-foot { opacity: 1; translate: -50% var(--parallax-y, 0px); }
-
-/* Make the RSVP floral frame visibly larger without changing the form */
-.rsvp-shell { width: min(100%, 1180px); }
-.rsvp-frame-desktop { transform: scale(1.12); transform-origin: center center; }
-.rsvp-frame-mobile { transform: scale(1.12); transform-origin: center center; }
-
-/* Slow, subtle parallax on flower illustrations relative to the page */
-img[src*="bouqette"], .calendar-tulips {
-  translate: 0 var(--parallax-y, 0px);
-  will-change: translate;
+  transform: translateX(-50%);
+  transform-origin: center bottom;
 }
 
-/* Keep the same relative composition on narrow screens; scale, don't reorder */
+/* Soft gradients blend adjacent block backgrounds without changing layout. */
+.registry-section {
+  background-image: linear-gradient(to bottom, #FFFBE9 0%, #C4E5FF 18%, #C4E5FF 100%);
+}
+.banquet-section {
+  background-image: linear-gradient(to bottom, #C4E5FF 0%, #8699F2 18%, #8699F2 82%, #FFFBE9 100%);
+}
+.details-section {
+  background-image: linear-gradient(to bottom, #8699F2 0%, #FFFBE9 16%, #FFFBE9 100%);
+}
+
 @media (max-width: 640px) {
-  .dresscode-topic {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(82px, 26vw);
-    grid-template-areas: "copy company" "palette palette";
-    gap: .65rem .8rem;
-    align-items: center;
-    padding: 0;
-  }
-  .dresscode-topic .detail-copy { grid-area: copy; min-width: 0; }
-  .company-image {
-    grid-area: company;
-    width: 100%;
-    max-width: 125px;
-    max-height: 190px;
-    justify-self: end;
-  }
-  .palette-image {
-    grid-area: palette;
-    width: min(72%, 220px);
-    max-width: none;
-    max-height: 180px;
-    justify-self: end;
-    margin: -.1rem 0 0;
-    transform: none;
-  }
-  .rsvp-shell { width: 100%; }
-  .rsvp-frame-desktop { transform: none; }
-  .rsvp-frame-mobile { transform: scale(1.08); }
-  .bouquet-collage { height: 250px; bottom: -2.5rem; }
-  .footer-foot { width: 125%; max-width: none; bottom: -2.5rem; }
-}
-@media (max-width: 380px) {
-  .dresscode-topic { grid-template-columns: minmax(0, 1fr) 76px; }
-  .company-image { max-height: 150px; }
-  .palette-image { width: 68%; }
+  .dresscode-topic { padding-right: 0; padding-bottom: 130px; }
+  .palette-image { width: min(68%, 230px); margin: .8rem 0 0 auto; transform: translateX(4%) scale(1.15); }
+  .company-image { right: -1rem; top: auto; bottom: -1.5rem; width: 105px; max-height: 145px; transform: none; }
+  .bouquet-collage { bottom: -3.7rem; height: 250px; }
+  .footer-foot { width: 130%; height: 100%; bottom: -2%; }
+  .registry-section { background-image: linear-gradient(to bottom, #FFFBE9 0%, #C4E5FF 14%, #C4E5FF 100%); }
+  .banquet-section { background-image: linear-gradient(to bottom, #C4E5FF 0%, #8699F2 12%, #8699F2 88%, #FFFBE9 100%); }
+  .details-section { background-image: linear-gradient(to bottom, #8699F2 0%, #FFFBE9 12%, #FFFBE9 100%); }
 }
