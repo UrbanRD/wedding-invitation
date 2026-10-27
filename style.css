@@ -489,15 +489,14 @@ button, input, textarea, select { color-scheme: light; }
   /* Дресс-код: текст на всю ширину → палитра → company по центру внизу */
   .dresscode-topic { display: block; padding: 0 0 clamp(230px, 62vw, 300px); }
   .palette-image { position: relative; right: auto; top: auto; width: min(64%, 240px); height: auto; margin: 1.2rem auto 0; }
-  .dresscode-topic {
-    /* резервируем место под увеличенную картинку, иначе она наедет на текст выше */
-    --company-h: clamp(440px, 120vw, 580px);   /* было 220px / 60vw / 290px */
-    padding: 0 0 calc(var(--company-h) + 1rem);
+ .dresscode-topic {
+    padding: 0 0 clamp(500px, 130vw, 650px);
   }
   .company-image {
-    width: 100%;                                /* было 92 % — это максимум без обрезки */
-    height: var(--company-h);                   /* было clamp(220px, 60vw, 290px) → ×2 */
-    bottom: -5rem
+    width: 92%;                  /* оставляем как было */
+    height: clamp(220px, 60vw, 290px);
+    transform: scale(2);
+    transform-origin: bottom center;   /* растёт от нижней кромки, чтобы не уехать вверх */
   }
 }
   .gifts-topic, .overnight-topic { display: block; min-height: 0; padding: 0 0 1rem; }
