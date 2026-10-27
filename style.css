@@ -273,7 +273,7 @@ button, input, textarea, select { color-scheme: light; }
 .rsvp-section { position: relative; z-index: 3; padding: .75rem clamp(.5rem, 2vw, 2rem) clamp(2rem, 4vw, 3.5rem); overflow: clip visible; }
 .rsvp-shell { position: relative; width: min(100%, 1100px); margin-inline: auto; padding: clamp(3rem, 6vw, 5rem) clamp(12rem, 23vw, 17rem); isolation: isolate; }
 .rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scale(1.15); pointer-events: none; } /* рамка увеличена на 15 % */
-.rsvp-frame-mobile { display: none; }
+
 .rsvp-card { position: relative; width: 100%; max-width: 650px; margin: 0 auto; padding: clamp(1.3rem, 2.7vw, 2.7rem); color: var(--cream); background: var(--chocolate); border-radius: 22px; }
 .rsvp-card h2 { margin: 0 0 1.8rem; padding: .05em .2em .1em; color: var(--chocolate); background: var(--cream); border: 2px solid var(--cream); border-radius: 11px; font-family: var(--heading-font); font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 400; line-height: 1.05; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
 .question { min-width: 0; margin: 0 0 1.55rem; padding: 0; border: 0; }
@@ -507,15 +507,15 @@ button, input, textarea, select { color-scheme: light; }
   .rsvp-section { padding: 1rem .25rem 4.3rem; }
   .rsvp-shell { width: 100%; padding: 4rem 6vw; }
   /* Рамка: на телефоне — отдельные фрагменты венка, чтобы цветы не сжимались */
-  .rsvp-frame-desktop { display: none; }
-  .rsvp-frame-mobile { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-  .frame-mobile-edge { position: absolute; display: block; max-width: none; pointer-events: none; }
-  .frame-mobile-top, .frame-mobile-bottom { left: -8%; width: 116%; height: auto; }
-  .frame-mobile-top { top: 0; }
-  .frame-mobile-bottom { bottom: 0; }
-  .frame-mobile-left, .frame-mobile-right { top: 55px; bottom: 55px; width: clamp(68px, 21vw, 88px); height: calc(100% - 110px); object-fit: cover; }
-  .frame-mobile-left { left: -1.5%; }
-  .frame-mobile-right { right: -1.5%; }
+ 
+  @media (max-width: 640px) {
+  .rsvp-shell { padding: 4rem 6vw; }
+  .rsvp-frame {
+    object-fit: fill;   /* растягиваем по высоте формы */
+    transform: none;    /* scale(1.15) был рассчитан на десктоп */
+  }
+}
+  
   .rsvp-card { padding: 1.25rem 1.1rem 1.5rem; border-radius: 16px; }
   .rsvp-card h2 { margin-bottom: 1.4rem; font-size: 2.5rem; border-radius: 8px; }
   .question { margin-bottom: 1.35rem; }
