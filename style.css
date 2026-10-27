@@ -271,10 +271,8 @@ button, input, textarea, select { color-scheme: light; }
 
 /* 7 — RSVP form framed with the supplied floral collage */
 .rsvp-section { position: relative; z-index: 3; padding: .75rem clamp(.5rem, 2vw, 2rem) clamp(2rem, 4vw, 3.5rem); overflow: clip visible; }
-.rsvp-shell { position: relative; width: min(100%, 1100px); margin-inline: auto; padding: clamp(3rem, 6vw, 5rem) clamp(12rem, 23vw, 17rem); isolation: isolate; }
-.rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scale(1.15); pointer-events: none; } /* рамка увеличена на 15 % */
-.rsvp-frame-mobile { display: none; }
-.rsvp-card { position: relative; width: 100%; max-width: 650px; margin: 0 auto; padding: clamp(1.3rem, 2.7vw, 2.7rem); color: var(--cream); background: var(--chocolate); border-radius: 22px; }
+
+.rsvp-card { position: relative; width: 100%; max-width: 800px; margin: 0 auto; padding: clamp(1.3rem, 2.7vw, 2.7rem); color: var(--cream); background: var(--chocolate); border-radius: 22px; }
 .rsvp-card h2 { margin: 0 0 1.8rem; padding: .05em .2em .1em; color: var(--chocolate); background: var(--cream); border: 2px solid var(--cream); border-radius: 11px; font-family: var(--heading-font); font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 400; line-height: 1.05; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
 .question { min-width: 0; margin: 0 0 1.55rem; padding: 0; border: 0; }
 .question legend { display: block; width: 100%; margin-bottom: .5rem; padding: 0; color: var(--cream); font-family: var(--heading-font); font-size: clamp(1.15rem, 1.8vw, 1.55rem); line-height: 1.2; }
@@ -318,21 +316,7 @@ button, input, textarea, select { color-scheme: light; }
 .footer-paint { z-index: -1; left: -20%; top: -230%; width: 16%; height: 440%; object-fit: fill; transform: rotate(90deg); }
 .footer-closing { position: relative; z-index: 2; margin: clamp(3rem, 6vw, 5rem) 0 1.2rem; text-align: center; font-family: var(--heading-font); font-size: clamp(2rem, 3.8vw, 3.8rem); }
 .footer-signature { position: relative; z-index: 2; margin: 0; text-align: center; font-family: var(--heading-font); font-size: clamp(2.1rem, 4.8vw, 4.8rem); line-height: 1.1; }
-.bouquet-collage {
-  position: absolute;
-  z-index: 1;
-  left: 55%;
-  bottom: -29%;
-  width: 120%;
-  height: auto;
-  max-height: none;
-  object-fit: contain;
-  object-position: center bottom;
-  pointer-events: none;
-  opacity: 1;
-  translate: -50% 0;
-  transform: none;
-}
+
 .site-footer.is-visible .bouquet-collage { opacity: 1; transform: translateY(0); }
 
 /* Simple reveal animations; content stays visible when JS or motion preferences are unavailable. */
@@ -399,7 +383,7 @@ button, input, textarea, select { color-scheme: light; }
   .company-image { left: 50%; bottom: 0; width: min(90%, 500px); height: clamp(240px, 80vw, 700px); max-height: none; }
   .gifts-topic, .overnight-topic { padding-right: clamp(110px, 20vw, 170px); }
 
-  .rsvp-shell { padding-inline: clamp(7rem, 16vw, 10rem); }
+
   .question legend { font-size: 1.25rem; }
   .choice { font-size: 1rem; line-height: 1.4; }
   .choice input { width: 1.2rem; height: 1.2rem; margin-top: .1rem; }
@@ -497,21 +481,15 @@ button, input, textarea, select { color-scheme: light; }
     transform: scale(2);
     transform-origin: bottom center;
   }
-}
   .gifts-topic, .overnight-topic { display: block; min-height: 0; padding: 0 0 1rem; }
   .gift-icon, .bed-icon { position: relative; right: auto; top: auto; display: block; width: 78px; height: 78px; margin: 1rem 0 0 auto; }
   .gift-blue-paint { right: -1.4rem; top: auto; bottom: -2rem; width: 60px; height: 190px; }
   .gift-red-paint { right: 3rem; bottom: -.5rem; width: 130px; height: 20px; }
   .overnight-paint-top, .overnight-paint-bottom { display: none;}
 
+
   .rsvp-section { padding: 1rem .25rem 4.3rem; }
-  .rsvp-shell { width: 100%; padding: 4rem 6vw; }
-  
-  .rsvp-shell { padding: 4rem 6vw; }
-  .rsvp-frame {
-    object-fit: fill;   /* растягиваем по высоте формы */
-    transform: none;    /* scale(1.15) был рассчитан на десктоп */
-  }
+ъ
   .rsvp-card { padding: 1.25rem 1.1rem 1.5rem; border-radius: 16px; }
   .rsvp-card h2 { margin-bottom: 1.4rem; font-size: 2.5rem; border-radius: 8px; }
   .question { margin-bottom: 1.35rem; }
@@ -538,6 +516,6 @@ button, input, textarea, select { color-scheme: light; }
   .hero-tulip { right: -2%; width: 145px; }
   .event-date-label { font-size: 1.9rem; }
   .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: 1fr; gap: .1rem; }
-  .rsvp-shell { padding-inline: 4vw; }
+
   .rsvp-card { padding-inline: .85rem; }
 }
