@@ -347,6 +347,17 @@ button, input, textarea, select { color-scheme: light; }
 }
 
 
+/* Keep the palette fixed even when the phone/browser requests dark appearance. */
+@media (prefers-color-scheme: dark) {
+  :root, html, body { color-scheme: only light; background-color: #FFFBE9; }
+  .section-cream { background-color: #FFFBE9; color: #351F11; }
+  .section-lightblue { background-color: #C4E5FF; color: #351F11; }
+  .section-blue { background-color: #8699F2; color: #FFFBE9; }
+  .site-header { color: #351F11; background-color: #FFFBE9; }
+  .rsvp-card { color: #FFFBE9; background-color: #351F11; }
+  .rsvp-card h2, .question input[type="text"], .question textarea, .submit-button { background-color: #FFFBE9; }
+}
+
 @media (max-width: 900px) {
   .site-header { gap: 1rem; min-height: 68px; padding-inline: 1.1rem; }
   .main-nav { gap: clamp(.8rem, 2vw, 1.3rem); }
@@ -372,6 +383,74 @@ button, input, textarea, select { color-scheme: light; }
   .section-padded { padding: 4.5rem 1.15rem; }
   .section-title { font-size: clamp(2.8rem, 12vw, 4rem); margin-bottom: 1.35rem; }
 
+  .hero { min-height: 630px; display: block; padding: 5.2rem 1.2rem 3.5rem; }
+  .hero-paint { width: 90px; left: -1.7rem; top: -3rem; height: 60%; transform: rotate(2deg); }
+  .hero-copy { margin: 0; width: 100%; max-width: 100%; }
+  .hero-eyebrow { font-size: .95rem; margin-bottom: 1.3rem; }
+  .hero h1 { font-size: clamp(4.6rem, 17vw, 6.6rem); line-height: .82; letter-spacing: -.055em; }
+  .hero-date { margin-top: 1.55rem; font-size: 1.28rem; }
+  .hero-note { max-width: 72%; font-size: 1.03rem; }
+  .hero-tulip { width: clamp(145px, 45vw, 210px); max-height: 48%; right: -1%; bottom: 2%; top: auto; }
+  .hero-edition { right: 1rem; bottom: .6rem; font-size: .55rem; }
+
+  .intro-paints { left: -20%; top: 44%; width: 170px; height: 48%; opacity: .5; }
+  .intro-copy .section-kicker { font-size: .88rem; }
+  .intro-copy .section-title { font-size: 2.65rem; }
+  .intro-lead { font-size: 1.02rem; }
+  .intro-dates p, .intro-request, .intro-signature { font-size: .98rem; }
+
+  .calendar-title { margin-bottom: 1rem; }
+  .calendar { font-size: 1.12rem; }
+  .calendar th, .calendar td { padding: .6rem .05rem; }
+  .calendar-events { grid-template-columns: 1fr; gap: .55rem; margin-top: 1.4rem; }
+  .calendar-events p { justify-content: flex-start; text-align: left; font-size: .98rem; }
+  .calendar-event-date { min-width: 2rem; font-size: 1.4em; }
+  .calendar-tulips { left: -4rem; bottom: -3%; width: 120px; opacity: .8; }
+  .calendar-paint { right: -4rem; top: 16%; width: 100px; height: 62%; opacity: .9; }
+
+  .event-section { padding: 4.6rem 1.15rem 4.5rem; }
+  .event-date-label { font-size: 2.2rem; }
+  .event-title { font-size: 3.2rem; }
+  .event-meta { font-size: 1.32rem; }
+  .address-link { font-size: .98rem; line-height: 1.42; }
+  .registry-cluster { top: 7%; right: -16%; width: 180px; height: 200px; opacity: .8; }
+  .registry-bouquet { top: 30%; right: -23%; width: 125px; opacity: .88; }
+  .event-icons { gap: .65rem; margin: 2.25rem auto 1.45rem; }
+  .icon-tile { flex-basis: 58px; width: 58px; }
+  .event-description { font-size: 1.04rem; text-align: left; margin-bottom: 2.5rem; }
+  .schedule-block { margin-bottom: 2.4rem; }
+  .schedule-title { font-size: 2rem; }
+  .schedule-list { gap: .7rem; }
+  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: minmax(110px, .48fr) 1fr; gap: .65rem; font-size: .93rem; }
+  .schedule-list dt { white-space: normal; }
+  .photo-strip { display: flex; gap: .85rem; overflow-x: auto; margin-inline: -1.15rem; padding: 0 1.15rem .5rem; scroll-snap-type: x mandatory; scrollbar-color: rgba(53,31,17,.5) transparent; }
+  .photo-strip figure { flex: 0 0 82%; scroll-snap-align: center; }
+  .photo-strip img, .banquet-gallery img { height: 270px; }
+  .registry-paint-bottom { height: 125px; bottom: -3rem; }
+  .registry-paint-bottom .paint { width: 42%; }
+  .banquet-paint-cluster { right: -22%; top: 0; width: 185px; height: 260px; opacity: .65; }
+  .schedule-flowers { width: 90px; right: -1rem; top: -3rem; opacity: .85; }
+
+  .details-content > .section-title { margin-bottom: 3rem; }
+  .detail-topic { margin-bottom: 3.3rem; gap: 1.1rem; }
+  .detail-title { font-size: 2.25rem; }
+  .detail-topic p { font-size: .98rem; }
+  .transfer-topic { padding-bottom: .5rem; }
+  .map-grid { grid-template-columns: 1fr; gap: 1.1rem; margin-top: 1.4rem; }
+  .map-card { padding: .55rem; }
+  .map-caption { font-size: .98rem; }
+  .map-card img { height: 235px; }
+  .train-link { font-size: .9rem; text-align: left; }
+  .transfer-paint { width: 72px; height: 37%; right: -2.2rem; top: 42%; opacity: .75; }
+  .dresscode-topic { display: block; padding-right: 0; min-height: auto; padding-bottom: 125px; }
+  .palette-image { display: block; width: min(76%, 255px); margin: .8rem auto 0; max-height: 235px; }
+  .dresscode-paint { width: 83px; height: 155px; right: -1.6rem; top: auto; bottom: -1rem; }
+  .gifts-topic, .overnight-topic { display: block; padding-right: 0; padding-bottom: 1rem; min-height: auto; }
+  .gift-icon, .bed-icon { position: relative; display: block; width: 78px; height: 78px; right: auto; top: auto; margin: 1rem 0 0 auto; }
+  .gift-blue-paint { width: 70px; height: 170px; right: -1.4rem; top: auto; bottom: -2rem; }
+  .gift-red-paint { width: 115px; height: 42px; right: 3rem; bottom: -1rem; }
+  .overnight-paint-top, .overnight-paint-bottom { width: 120px; height: 46px; right: -1.2rem; }
+
   .rsvp-section { padding: 1rem .25rem 4.3rem; }
   .rsvp-shell { width: 100%; padding: 4rem 6vw; }
   .rsvp-card { padding: 1.1rem .95rem 1.35rem; border-radius: 16px; }
@@ -382,3 +461,44 @@ button, input, textarea, select { color-scheme: light; }
   .drinks-grid { grid-template-columns: 1fr; }
   .question input[type="text"], .question textarea { font-size: .84rem; }
   .submit-button { width: 80%; font-size: 1.1rem; }
+
+  .site-footer { min-height: 600px; padding: 4.5rem 1.15rem 16rem; }
+  .footer-question { grid-template-columns: 1fr auto; gap: 1rem; min-height: 190px; }
+  .footer-copy .detail-title { font-size: 2.2rem; }
+  .footer-copy p { font-size: .96rem; }
+  .question-icon { width: 65px; height: 65px; }
+  .footer-paint { width: 80%; height: 65px; left: -5%; bottom: -7%; }
+  .footer-closing { margin-top: 2.6rem; font-size: 2rem; }
+  .footer-signature { font-size: 2.5rem; }
+  .bouquet-collage { bottom: -3.7rem; height: 260px; }
+  .footer-bouquet { max-width: 60%; }
+  .bouquet-one { left: -13%; width: 47%; }
+  .bouquet-two { left: 12%; width: 53%; }
+  .bouquet-three { right: 8%; width: 50%; }
+  .bouquet-four { right: -15%; width: 48%; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 600px; }
+  .hero h1 { font-size: 4.25rem; }
+  .hero-tulip { width: 145px; right: -9px; }
+  .event-date-label { font-size: 1.95rem; }
+  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: 1fr; gap: .05rem; }
+  .rsvp-shell { padding-inline: 4vw; }
+  .rsvp-card { padding-inline: .75rem; }
+}
+
+/* The full floral wreath has its natural proportions on wide screens. On phones
+   its edge crops are arranged separately so the flowers do not become stretched. */
+.rsvp-frame-mobile { display: none; }
+@media (max-width: 640px) {
+  .rsvp-frame-desktop { display: none; }
+  .rsvp-frame-mobile { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .frame-mobile-edge { position: absolute; display: block; max-width: none; pointer-events: none; }
+  .frame-mobile-top, .frame-mobile-bottom { left: -8%; width: 116%; height: auto; }
+  .frame-mobile-top { top: 0; }
+  .frame-mobile-bottom { bottom: 0; }
+  .frame-mobile-left, .frame-mobile-right { top: 55px; bottom: 55px; width: clamp(68px, 21vw, 88px); height: calc(100% - 110px); object-fit: cover; }
+  .frame-mobile-left { left: -1.5%; }
+  .frame-mobile-right { right: -1.5%; }
+}
