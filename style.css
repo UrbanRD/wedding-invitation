@@ -490,13 +490,13 @@ button, input, textarea, select { color-scheme: light; }
   .dresscode-topic { display: block; padding: 0 0 clamp(230px, 62vw, 300px); }
   .palette-image { position: relative; right: auto; top: auto; width: min(64%, 240px); height: auto; margin: 1.2rem auto 0; }
  .dresscode-topic {
-    padding: 0 0 clamp(500px, 130vw, 650px);
+    padding: 0 0 calc(clamp(500px, 130vw, 650px) + 5rem);
   }
   .company-image {
-    width: 92%;                  /* оставляем как было */
+    width: 92%;
     height: clamp(220px, 60vw, 290px);
     transform: scale(2);
-    transform-origin: bottom center;   /* растёт от нижней кромки, чтобы не уехать вверх */
+    transform-origin: bottom center;
   }
 }
   .gifts-topic, .overnight-topic { display: block; min-height: 0; padding: 0 0 1rem; }
