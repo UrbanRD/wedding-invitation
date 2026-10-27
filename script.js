@@ -7,47 +7,23 @@
   "use strict";
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyR1C7wJycqJynC3PTH-xHTQH3SD_qeUduggcram5ipf7fzGV5EleZRRiGUkeSWgXDNg/exec"; // Example: https://script.google.com/macros/s/DEPLOYMENT_ID/exec
   document.documentElement.classList.add("js-enabled");
-
-  // Subtle scroll parallax: floral images drift a little slower than the page.
-  const floralImages = document.querySelectorAll(
-    '.hero-tulip, .calendar-tulips, .registry-bouquet, .schedule-flowers, .footer-foot, img[src*="bouqette"], img[src*="three-tulips"]'
-  );
-  let parallaxFrame = 0;
-  const updateFloralParallax = () => {
-    if (parallaxFrame) return;
-    parallaxFrame = window.requestAnimationFrame(() => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!reduceMotion) {
-        floralImages.forEach((image) => {
-          const rect = image.getBoundingClientRect();
-          const distance = (rect.top + rect.height / 2 - window.innerHeight / 2) * -0.035;
-          image.style.translate = `0 ${Math.max(-24, Math.min(24, distance)).toFixed(1)}px`;
-        });
-      }
-      parallaxFrame = 0;
-    });
-  };
-  window.addEventListener("scroll", updateFloralParallax, { passive: true });
-  window.addEventListener("resize", updateFloralParallax, { passive: true });
-  updateFloralParallax();
+  // The phone shows exactly the desktop layout (same as <meta name="viewport" content="width=1200"> in index.html).
+  document.querySelector('meta[name="viewport"]')?.setAttribute("content", "width=1200");
 
   // Soft reveal animations. If IntersectionObserver is unavailable, content remains visible.
   const revealElements = document.querySelectorAll(".reveal");
+  const footer = document.querySelector(".site-footer");
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-          if (entry.target.classList.contains("site-footer")) {
-            entry.target.classList.add("is-visible");
-          }
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
 
     revealElements.forEach((element) => revealObserver.observe(element));
-    const footer = document.querySelector(".site-footer");
     if (footer) {
       const footerObserver = new IntersectionObserver((entries, observer) => {
         if (entries.some((entry) => entry.isIntersecting)) {
@@ -59,7 +35,30 @@
     }
   } else {
     revealElements.forEach((element) => element.classList.add("is-visible"));
-    document.querySelector(".site-footer")?.classList.add("is-visible");
+    footer?.classList.add("is-visible");
+  }
+
+  // Flowers (bouqette…bouqette5, three-tulips) scroll slightly slower than the background.
+  const parallaxImages = document.querySelectorAll('img[src*="bouqette"], img[src*="three-tulips"]');
+  if (parallaxImages.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let ticking = false;
+    const updateParallax = () => {
+      parallaxImages.forEach((image) => {
+        const rect = image.getBoundingClientRect();
+        const center = rect.top + rect.height / 2 - (Number(image.dataset.parallax) || 0);
+        const limit = window.innerHeight * 0.1;
+        const offset = Math.max(-limit, Math.min(limit, (window.innerHeight / 2 - center) * 0.1));
+        image.dataset.parallax = offset.toFixed(1);
+        image.style.translate = `0 ${offset.toFixed(1)}px`;
+      });
+      ticking = false;
+    };
+    const requestParallax = () => {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(updateParallax); }
+    };
+    window.addEventListener("scroll", requestParallax, { passive: true });
+    window.addEventListener("resize", requestParallax);
+    updateParallax();
   }
 
   const form = document.getElementById("rsvpForm");
@@ -68,6 +67,8 @@
 
   const byName = (name) => Array.from(form.querySelectorAll(`[name="${name}"]`));
   const selectedValues = (name) => byName(name).filter((input) => input.checked).map((input) => input.value);
+  const selectedValue = (name) => (byName(name).find((input) => input.checked) || {}).value || "";
+  const textValue = (name) => String(form.elements[name].value || "").trim();
 
   // In attendance, guests may choose either day or both; "can't attend" excludes both.
   // In drinks, guests may choose any combination; "I don't drink alcohol" excludes all others.
@@ -111,18 +112,18 @@
   }
 
   function collectPayload() {
-    const name = String(form.elements.guestName.value || "").trim();
+    const name = textValue("guestName");
     return {
       guestName: name,
       answers: [
         { question: "Ваше имя", answer: name },
         { question: "Присоединитесь ли вы к нам?", answer: selectedValues("attendance") },
-        { question: "С кем вы будете?", answer: String(form.elements.seating.value || "").trim() },
-        { question: "Ваши предпочтения по еде", answer: String(form.elements.food.value || "").trim() },
+        { question: "С кем вы будете?", answer: textValue("seating") },
+        { question: "Ваши предпочтения по еде", answer: textValue("food") },
         { question: "Ваши предпочтения по напиткам", answer: selectedValues("drinks") },
-        { question: "Нужен ли вам трансфер в день банкета?", answer: (byName("transfer").find((input) => input.checked) || {}).value || "" },
-        { question: "Планируете ли вы остаться на базе отдыха на ночь?", answer: (byName("overnight").find((input) => input.checked) || {}).value || "" },
-        { question: "Дополнительно", answer: String(form.elements.additional.value || "").trim() }
+        { question: "Нужен ли вам трансфер в день банкета?", answer: selectedValue("transfer") },
+        { question: "Планируете ли вы остаться на базе отдыха на ночь?", answer: selectedValue("overnight") },
+        { question: "Дополнительно", answer: textValue("additional") }
       ],
       submittedAt: new Date().toISOString()
     };
@@ -133,31 +134,23 @@
     clearStatus();
     form.querySelectorAll(".question.is-invalid").forEach((element) => element.classList.remove("is-invalid"));
 
-    const name = String(form.elements.guestName.value || "").trim();
-    const attendance = selectedValues("attendance");
-    const drinks = selectedValues("drinks");
-    const transfer = byName("transfer").some((input) => input.checked);
-    const overnight = byName("overnight").some((input) => input.checked);
-
-    if (!name) {
-      const field = form.querySelector(".question-name");
-      showError("Пожалуйста, укажите ваше имя.", field);
-      form.elements.guestName.focus();
+    if (!textValue("guestName")) {
+      showError("Пожалуйста, укажите ваше имя.", form.querySelector(".question-name"));
       return;
     }
-    if (!attendance.length) {
+    if (!selectedValues("attendance").length) {
       showError("Пожалуйста, укажите, сможете ли вы присоединиться к нам.", document.getElementById("attendanceGroup"));
       return;
     }
-    if (!drinks.length) {
+    if (!selectedValues("drinks").length) {
       showError("Пожалуйста, укажите предпочтения по напиткам.", document.getElementById("drinksGroup"));
       return;
     }
-    if (!transfer) {
+    if (!selectedValue("transfer")) {
       showError("Пожалуйста, выберите вариант трансфера.", document.getElementById("transferGroup"));
       return;
     }
-    if (!overnight) {
+    if (!selectedValue("overnight")) {
       showError("Пожалуйста, укажите, планируете ли вы остаться на ночь.", document.getElementById("overnightGroup"));
       return;
     }
@@ -165,7 +158,6 @@
     const payload = collectPayload();
     if (!APPS_SCRIPT_URL.trim()) {
       status.textContent = "Анкета проверена. Чтобы ответы сохранялись в Google Drive, нужно подключить адрес Google Apps Script по инструкции в README.md.";
-      status.classList.remove("is-error");
       return;
     }
 
@@ -180,7 +172,6 @@
         body
       });
       status.textContent = "Спасибо! Запрос с вашими ответами отправлен. Если потребуется изменить ответы, пожалуйста, свяжитесь с нами.";
-      status.classList.remove("is-error");
       form.reset();
     } catch (error) {
       console.error("Не удалось отправить ответы анкеты:", error);

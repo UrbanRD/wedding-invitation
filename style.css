@@ -15,7 +15,6 @@
 
 :root {
   color-scheme: only light;
-  supported-color-schemes: light;
   --cream: #FFFBE9;
   --blue: #8699F2;
   --lime: #D8DC00;
@@ -31,7 +30,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html {
   color-scheme: only light;
-  background: #FFFBE9;
+  background: var(--cream);
   scroll-behavior: smooth;
   scroll-padding-top: 78px;
   -webkit-text-size-adjust: 100%;
@@ -39,8 +38,8 @@ html {
 }
 body {
   margin: 0;
-  background: #FFFBE9;
-  color: #351F11;
+  background: var(--cream);
+  color: var(--chocolate);
   font-family: var(--body-font);
   font-size: clamp(18px, 1.65vw, 28px);
   line-height: 1.48;
@@ -64,17 +63,13 @@ button, input, textarea, select { color-scheme: light; }
 
 .site-header {
   position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: center;
   gap: 2rem; min-height: 76px; padding: .65rem clamp(1.2rem, 4.5vw, 5rem);
   color: var(--chocolate); background: var(--cream);
   border-bottom: 1px solid rgba(53, 31, 17, .18);
 }
-.brand {
-  flex: 0 0 auto; font-family: var(--heading-font); font-size: 1.2rem;
-  letter-spacing: .08em; text-transform: uppercase; text-decoration: none; white-space: nowrap;
-}
-.brand span { padding: 0 .1em; color: var(--blue); }
-.main-nav { display: flex; align-items: center; justify-content: flex-end; gap: clamp(1rem, 2.6vw, 2.7rem); }
+.brand { display: none; }
+.main-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(1rem, 2.6vw, 2.7rem); }
 .main-nav a {
   position: relative; display: inline-block; padding: .35rem 0;
   font-family: var(--heading-font); font-size: clamp(.95rem, 1.2vw, 1.2rem);
@@ -86,9 +81,14 @@ button, input, textarea, select { color-scheme: light; }
 }
 .main-nav a:hover::after, .main-nav a:focus-visible::after { right: 0; }
 
-.section-cream { background-color: #FFFBE9; color: #351F11; }
-.section-lightblue { background-color: #C4E5FF; color: #351F11; }
-.section-blue { background-color: #8699F2; color: #FFFBE9; }
+/* Фон блоков: верх каждого блока плавно переходит из цвета предыдущего блока */
+.section-cream { --bg: #FFFBE9; color: #351F11; }
+.section-lightblue { --bg: #C4E5FF; color: #351F11; }
+.section-blue { --bg: #8699F2; color: #FFFBE9; }
+.section-cream, .section-lightblue, .section-blue { background: linear-gradient(var(--prev, var(--bg)), var(--bg) clamp(90px, 12vw, 180px)) var(--bg); }
+:is(.section-cream + *, main:has(> .section-cream:last-child) + *) { --prev: #FFFBE9; }
+:is(.section-lightblue + *, main:has(> .section-lightblue:last-child) + *) { --prev: #C4E5FF; }
+:is(.section-blue + *, main:has(> .section-blue:last-child) + *) { --prev: #8699F2; }
 .section-padded { padding: clamp(5rem, 10vw, 10rem) clamp(1.2rem, 5vw, 5rem); }
 .content-wrap { position: relative; z-index: 2; width: min(100%, var(--content-width)); margin-inline: auto; }
 .section-title, .event-title, .detail-title, .schedule-title {
@@ -103,13 +103,12 @@ button, input, textarea, select { color-scheme: light; }
 
 /* 1 — cover */
 .hero {
-  position: relative; min-height: min(780px, calc(100svh - 76px));
-  min-height: clamp(590px, calc(100svh - 76px), 820px);
+  position: relative; min-height: clamp(540px, calc(100svh - 76px), 760px);
   display: grid; grid-template-columns: 1fr .88fr; align-items: center;
   padding: clamp(3rem, 8vw, 7.5rem) clamp(1.5rem, 8.5vw, 9rem);
   isolation: isolate; overflow: clip;
 }
-.hero-paint { z-index: -1; right: 7%; top: -10%; width: clamp(200px, 15vw, 210px); height: 95%; object-fit: fill; transform: rotate(0eg); }
+.hero-paint { z-index: -1; right: 7%; top: -10%; width: clamp(200px, 15vw, 210px); height: 95%; object-fit: fill; }
 .hero-copy { position: relative; z-index: 3; width: max-content; max-width: 100%; margin-left: clamp(0rem, 2vw, 2rem); }
 .hero-eyebrow { margin-bottom: clamp(1.1rem, 2.3vw, 2.2rem); }
 .hero h1 {
@@ -130,7 +129,7 @@ button, input, textarea, select { color-scheme: light; }
 }
 
 /* 2 — intro */
-.intro { position: relative; overflow: clip; isolation: isolate; }
+.intro { position: relative; overflow: clip; isolation: isolate; padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3rem, 6vw, 5rem); }
 .intro-copy { max-width: 1010px; text-align: center; }
 .intro-copy .section-kicker { margin-bottom: 1.2rem; }
 .intro-copy .section-title { margin-bottom: 2rem; }
@@ -142,8 +141,7 @@ button, input, textarea, select { color-scheme: light; }
 .intro-signature { margin: 2rem 0 0; text-align: right; }
 .intro-paints { position: absolute; z-index: -1; left: 3%; top: 0%; width: clamp(180px, 19vw, 300px); height: 70%; opacity: .94; }
 .intro-paint-blue { left: 0; top: 2%; width: 120%; height: 120%; object-fit: contain; transform: rotate(180deg); }
-.intro-paint-light { left: 20%; top: 28%; width: 120%; height: 120%; object-fit: contain; transform: rotate(0deg); }
-
+.intro-paint-light { left: 20%; top: 28%; width: 120%; height: 120%; object-fit: contain; }
 
 /* 3 — calendar */
 .calendar-section { position: relative; overflow: clip; isolation: isolate; }
@@ -154,6 +152,7 @@ button, input, textarea, select { color-scheme: light; }
 .calendar th, .calendar td { padding: clamp(.5rem, 1.2vw, 1rem) .15rem; border: 0; font-weight: 400; }
 .calendar thead { border-bottom: 1px solid var(--line); }
 .calendar .weekend, .calendar .holiday { color: var(--weekend-red); }
+/* Отдельные мазки для 26 и 27 февраля; 27-е — красное, как выходной */
 .date-highlight {
   position: relative; z-index: 0; display: inline-grid; place-items: center;
   width: 2.1em; height: 2.1em; color: var(--chocolate); text-decoration: underline;
@@ -161,14 +160,16 @@ button, input, textarea, select { color-scheme: light; }
 }
 .date-highlight::before {
   content: ""; position: absolute; z-index: -1; inset: -17% -24%;
-  background: url("images/paints/lime_1.webp") center / 100% 100% no-repeat;
+  background: center / 100% 100% no-repeat; transform: rotate(15deg);
 }
-.date-highlight-red { color: var(--weekend-red); }
+.date-highlight-blue::before { background-image: url("images/paints/blue_1.webp"); }
+.date-highlight-lime::before { background-image: url("images/paints/lime_1.webp"); }
+.date-highlight-lime { color: #c62828; }
 .calendar-events { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
 .calendar-events p { display: flex; align-items: baseline; justify-content: center; gap: .8rem; margin: 0; text-align: center; }
 .calendar-event-date { font-family: var(--heading-font); font-size: 1.6em; white-space: nowrap; }
 .calendar-tulips { position: absolute; z-index: -1; left: -5%; bottom: 3%; width: clamp(220px, 17vw, 330px); transform: rotate(45deg); }
-.calendar-paint { right: -7%; top: 5%; width: clamp(145px, 18vw, 250px); height: 85%; object-fit: fill; transform: rotate(0deg) scaleX(-1); z-index: -1; }
+.calendar-paint { right: -7%; top: 5%; width: clamp(145px, 18vw, 250px); height: 85%; object-fit: fill; transform: scaleX(-1); z-index: -1; }
 
 /* 4 and 5 — event blocks */
 .event-section { position: relative; padding: clamp(5rem, 9vw, 9rem) clamp(1.2rem, 5vw, 5rem) clamp(5rem, 8vw, 8rem); overflow: clip; isolation: isolate; }
@@ -181,11 +182,11 @@ button, input, textarea, select { color-scheme: light; }
 .event-paint-cluster { position: absolute; z-index: -1; pointer-events: none; }
 .registry-cluster { top: 2%; right: 4%; width: clamp(190px, 25vw, 380px); height: clamp(180px, 26vw, 370px); }
 .registry-cluster .paint { object-fit: fill; }
-.cluster-creme { top: 20%; left: -22%; width: 70%; height: 160%; transform: rotate(90deg) scaleY(-1)}
-.cluster-lime { top: 45%; left: -15%; width: 55%; height: 135%; transform: rotate(90deg) scaleY(-1)}
+.cluster-creme { top: 20%; left: -22%; width: 70%; height: 160%; transform: rotate(90deg) scaleY(-1); }
+.cluster-lime { top: 45%; left: -15%; width: 55%; height: 135%; transform: rotate(90deg) scaleY(-1); }
 .cluster-red { bottom: -9%; left: -49%; width: 55%; height: 10%; transform: rotate(-30deg); }
 .event-bouquet { position: absolute; z-index: 0; pointer-events: none; }
-.registry-bouquet { top: 35%; right: -13%; width: clamp(400px, 30vw, 450px); transform: rotate(-90deg)scaleX(-1);}
+.registry-bouquet { top: 40%; right: -23%; width: clamp(500px, 35vw, 900px); transform: rotate(-90deg) scaleX(-1); }
 .event-icons { display: flex; justify-content: center; gap: clamp(.8rem, 2.3vw, 2.2rem); margin: clamp(3rem, 5vw, 5rem) auto 1.7rem; }
 .icon-tile { flex: 0 0 clamp(66px, 7vw, 92px); width: clamp(66px, 7vw, 92px); aspect-ratio: 1; display: grid; place-items: center; border: 1.5px solid currentColor; background: transparent; }
 .icon-tile img { width: 68%; height: 68%; object-fit: contain; }
@@ -198,7 +199,7 @@ button, input, textarea, select { color-scheme: light; }
 .schedule-list dd { margin: 0; }
 .photo-strip { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.65rem, 1.4vw, 1.4rem); margin: 0 auto; }
 .photo-strip figure { min-width: 0; margin: 0; overflow: hidden; }
-.photo-strip img { width: 100%; height: clamp(220px, 31vw, 405px); object-fit: cover; transition: transform .7s cubic-bezier(.2,.6,.2,1); }
+.photo-strip img { width: 100%; height: clamp(290px, 40vw, 550px); object-fit: cover; transition: transform .7s cubic-bezier(.2,.6,.2,1); }
 .photo-strip figure:hover img { transform: scale(1.035); }
 .registry-paint-bottom { position: absolute; left: -2%; right: -1%; bottom: -3rem; height: 220px; z-index: 0; pointer-events: none; }
 .registry-paint-bottom .paint { height: 100%; width: 32%; object-fit: fill; bottom: -10%; }
@@ -219,14 +220,14 @@ button, input, textarea, select { color-scheme: light; }
 .banquet-icons .icon-tile img { filter: brightness(0) saturate(100%) invert(99%) sepia(12%) saturate(631%) hue-rotate(342deg) brightness(103%) contrast(104%); }
 .banquet-schedule { max-width: 860px; }
 .banquet-schedule .schedule-list > div { grid-template-columns: minmax(100px, .34fr) 1fr; }
-.schedule-flowers { position: absolute; width: clamp(300px, 40vw, 500px); right: -40%; top: -20%; transform: rotate(0deg); pointer-events: none; }
-.banquet-gallery img { height: clamp(210px, 29vw, 370px); }
+.banquet-gallery img { height: clamp(290px, 40vw, 550px); }
 
 /* 6 — details */
 .details-section { position: relative; overflow: clip; }
 .details-content { max-width: 1100px; }
 .details-content > .section-title { margin-bottom: clamp(3rem, 6vw, 5rem); }
 .detail-topic { position: relative; display: flex; align-items: flex-start; gap: 2.5rem; margin: 0 0 clamp(3.7rem, 7vw, 6rem); }
+.details-content > .detail-topic:last-child { margin-bottom: 1.5rem; }
 .detail-copy { position: relative; z-index: 2; flex: 1 1 auto; min-width: 0; }
 .detail-title { margin: 0 0 .8rem; font-size: clamp(2.3rem, 3.4vw, 3.5rem); }
 .detail-topic p { margin: .45rem 0 1rem; }
@@ -237,26 +238,42 @@ button, input, textarea, select { color-scheme: light; }
 .map-card img { width: 100%; height: clamp(190px, 24vw, 310px); object-fit: cover; }
 .map-open { font-size: .88rem; text-decoration: underline; text-underline-offset: .18em; }
 .train-link { display: block; position: relative; z-index: 2; margin-top: 1.1rem; text-align: right; font-size: .95em; }
-.transfer-paint { width: clamp(75px, 9vw, 145px); height: 63%; right: -15%; top: 23%; object-fit: fill; transform: rotate(0deg); }
-.dresscode-topic { align-items: center; padding-right: clamp(130px, 26vw, 310px); min-height: 240px; }
-.palette-image { flex: 0 0 clamp(155px, 25vw, 300px); width: clamp(155px, 25vw, 300px); max-height: 270px; object-fit: contain; }
-.gifts-topic { padding-right: clamp(110px, 23vw, 265px); min-height: 200px; }
+
+.dresscode-topic { padding-right: clamp(110px, 23vw, 265px); min-height: 600px; }
+.company-image {   position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: -12%;
+  width: 50%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  object-position: center bottom;
+  pointer-events: none;
+  opacity: 1;
+  translate: -50% 0;
+  transform: none; }
+.palette-image { flex: 0 0 auto; width: clamp(76px, 40vw, 250px); height: clamp(76px, 40vw, 250px); object-fit: contain; position: absolute; right: -10%; top: 0%; z-index: 2;}
+
+.gifts-topic { padding-right: clamp(110px, 23vw, 265px); min-height: 230px; }
 .detail-icon { flex: 0 0 auto; width: clamp(76px, 10vw, 125px); height: clamp(76px, 10vw, 125px); object-fit: contain; }
 .gift-icon { position: absolute; right: 8%; top: 25%; z-index: 2; }
-.gift-blue-paint { right: 0%; top: -5%; width: 65px; height: 330px; object-fit: fill; transform: rotate(0deg); }
+.gift-blue-paint { right: 0%; top: -5%; width: 65px; height: 330px; object-fit: fill; }
 .gift-red-paint { right: 7%; bottom: 15%; width: 230px; height: 23px; object-fit: fill; transform: rotate(180deg); }
 .inline-link { display: inline-block; font-family: var(--heading-font); text-underline-offset: .2em; }
+
 .overnight-topic { padding-right: clamp(110px, 23vw, 265px); min-height: 230px; }
+.thanks-note { margin-block: .4rem !important; line-height: 1.2; text-align: left; }
 .bed-icon { position: absolute; right: 8%; top: 21%; z-index: 2; }
 .overnight-paint-top, .overnight-paint-bottom { right: 7%; width: 120px; height: 200px; object-fit: fill; }
 .overnight-paint-top { top: -25%; transform: rotate(90deg) scaleX(-1); }
-.overnight-paint-bottom { bottom: -8%; right: 9%; width: 120px; height: 200px; transform: rotate(-90deg) scaleX(-1); object-fit: ill; }
-
+.overnight-paint-bottom { bottom: -8%; right: 9%; transform: rotate(-90deg) scaleX(-1); }
 
 /* 7 — RSVP form framed with the supplied floral collage */
-.rsvp-section { position: relative; padding: clamp(1rem, 3vw, 3rem) clamp(.5rem, 2vw, 2rem) clamp(5rem, 9vw, 9rem); overflow: clip; }
-.rsvp-shell { position: relative; width: min(100%, 1100px); margin-inline: auto; padding: clamp(5rem, 9vw, 8rem) clamp(12rem, 23vw, 17rem); isolation: isolate; }
-.rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; transform: scale(1.2); }
+.rsvp-section { position: relative; z-index: 3; padding: .75rem clamp(.5rem, 2vw, 2rem) clamp(2rem, 4vw, 3.5rem); overflow: clip visible; }
+.rsvp-shell { position: relative; width: min(100%, 1100px); margin-inline: auto; padding: clamp(3rem, 6vw, 5rem) clamp(12rem, 23vw, 17rem); isolation: isolate; }
+.rsvp-frame { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scale(1.15); pointer-events: none; } /* рамка увеличена на 15 % */
+.rsvp-frame-mobile { display: none; }
 .rsvp-card { position: relative; width: 100%; max-width: 650px; margin: 0 auto; padding: clamp(1.3rem, 2.7vw, 2.7rem); color: var(--cream); background: var(--chocolate); border-radius: 22px; }
 .rsvp-card h2 { margin: 0 0 1.8rem; padding: .05em .2em .1em; color: var(--chocolate); background: var(--cream); border: 2px solid var(--cream); border-radius: 11px; font-family: var(--heading-font); font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 400; line-height: 1.05; letter-spacing: .06em; text-align: center; text-transform: uppercase; }
 .question { min-width: 0; margin: 0 0 1.55rem; padding: 0; border: 0; }
@@ -292,23 +309,32 @@ button, input, textarea, select { color-scheme: light; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
 /* 8 — footer */
-.site-footer { position: relative; min-height: 720px; padding: clamp(4rem, 9vw, 8rem) clamp(1.2rem, 5vw, 5rem) 21rem; overflow: clip; isolation: isolate; }
+.site-footer { position: relative; max-height: 1600px; padding: clamp(4rem, 9vw, 8rem) clamp(1.2rem, 5vw, 5rem) 21rem; overflow: visible; isolation: isolate; }
 .footer-content { max-width: 1050px; }
 .footer-question { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2.5rem; min-height: 240px; }
 .footer-copy { max-width: 750px; position: relative; z-index: 2; }
 .footer-copy .detail-title { margin-bottom: .5rem; }
 .footer-copy p { margin: .4rem 0; text-align: center; }
 .question-icon { width: clamp(90px, 11vw, 145px); height: clamp(90px, 11vw, 145px); }
-.footer-paint { z-index: -1; left: -20%; top: -255%; width: 16%; height: 440%; object-fit: fill; transform: rotate(90deg); }
+.footer-paint { z-index: -1; left: -20%; top: -230%; width: 16%; height: 440%; object-fit: fill; transform: rotate(90deg); }
 .footer-closing { position: relative; z-index: 2; margin: clamp(3rem, 6vw, 5rem) 0 1.2rem; text-align: center; font-family: var(--heading-font); font-size: clamp(2rem, 3.8vw, 3.8rem); }
 .footer-signature { position: relative; z-index: 2; margin: 0; text-align: center; font-family: var(--heading-font); font-size: clamp(2.1rem, 4.8vw, 4.8rem); line-height: 1.1; }
-.bouquet-collage { position: absolute; z-index: 1; left: 0; right: 0; bottom: -7rem; height: clamp(300px, 32vw, 460px); pointer-events: none; }
-.footer-bouquet { position: absolute; bottom: 0; width: clamp(180px, 25vw, 350px); max-height: 100%; object-fit: contain; object-position: bottom; opacity: 0; transform: translateY(80px) rotate(var(--rotation,0deg)); transition: opacity .8s ease, transform 1.1s cubic-bezier(.2,.7,.25,1); }
-.bouquet-one { --rotation: -9deg; left: -2%; width: clamp(170px, 22vw, 300px); transition-delay: .05s; }
-.bouquet-two { --rotation: -2deg; left: 22%; width: clamp(210px, 27vw, 390px); transition-delay: .16s; }
-.bouquet-three { --rotation: 7deg; right: 20%; width: clamp(190px, 25vw, 350px); transition-delay: .25s; }
-.bouquet-four { --rotation: 4deg; right: -3%; width: clamp(185px, 24vw, 340px); transition-delay: .35s; }
-.site-footer.is-visible .footer-bouquet { opacity: 1; transform: translateY(0) rotate(var(--rotation,0deg)); }
+.bouquet-collage {
+  position: absolute;
+  z-index: 1;
+  left: 55%;
+  bottom: -29%;
+  width: 120%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center bottom;
+  pointer-events: none;
+  opacity: 1;
+  translate: -50% 0;
+  transform: none;
+}
+.site-footer.is-visible .bouquet-collage { opacity: 1; transform: translateY(0); }
 
 /* Simple reveal animations; content stays visible when JS or motion preferences are unavailable. */
 .reveal { opacity: 1; transform: none; }
@@ -320,415 +346,5 @@ button, input, textarea, select { color-scheme: light; }
   .js-enabled .reveal { opacity: 1; transform: none; }
 }
 
-/* Keep the palette fixed even when the phone/browser requests dark appearance. */
-@media (prefers-color-scheme: dark) {
-  :root, html, body { color-scheme: only light; background-color: #FFFBE9; }
-  .section-cream { background-color: #FFFBE9; color: #351F11; }
-  .section-lightblue { background-color: #C4E5FF; color: #351F11; }
-  .section-blue { background-color: #8699F2; color: #FFFBE9; }
-  .site-header { color: #351F11; background-color: #FFFBE9; }
-  .rsvp-card { color: #FFFBE9; background-color: #351F11; }
-  .rsvp-card h2, .question input[type="text"], .question textarea, .submit-button { background-color: #FFFBE9; }
-}
-
-@media (max-width: 900px) {
-  .site-header { gap: 1rem; min-height: 68px; padding-inline: 1.1rem; }
-  .main-nav { gap: clamp(.8rem, 2vw, 1.3rem); }
-  .main-nav a { font-size: .95rem; letter-spacing: .04em; }
-  .hero { grid-template-columns: 1fr .7fr; padding-inline: 6vw; }
-  .hero-tulip { right: 5%; width: clamp(150px, 30vw, 290px); }
-  .intro-paints { opacity: .65; }
-  .calendar-tulips { left: -9%; width: 160px; }
-  .calendar-paint { right: -10%; }
-  .registry-bouquet { right: -10%; width: 180px; }
-  .schedule-flowers { right: -12%; width: 140px; }
-  .rsvp-shell { padding-inline: clamp(8rem, 18vw, 12rem); }
-}
-
-@media (max-width: 640px) {
-  body { font-size: 18px; line-height: 1.48; }
-  .site-header { min-height: 62px; display: block; padding: .55rem .6rem .45rem; }
-  .brand { display: block; width: max-content; margin: 0 auto .35rem; font-size: .9rem; }
-  .main-nav { justify-content: flex-start; gap: 1.2rem; overflow-x: auto; padding: .15rem .35rem .28rem; scrollbar-width: none; }
-  .main-nav::-webkit-scrollbar { display: none; }
-  .main-nav a { flex: 0 0 auto; font-size: .82rem; }
-  html { scroll-padding-top: 88px; }
-  .section-padded { padding: 4.5rem 1.15rem; }
-  .section-title { font-size: clamp(2.8rem, 12vw, 4rem); margin-bottom: 1.35rem; }
-
-  .hero { min-height: 630px; display: block; padding: 5.2rem 1.2rem 3.5rem; }
-  .hero-paint { width: 90px; left: -1.7rem; top: -3rem; height: 60%; transform: rotate(2deg); }
-  .hero-copy { margin: 0; width: 100%; max-width: 100%; }
-  .hero-eyebrow { font-size: .95rem; margin-bottom: 1.3rem; }
-  .hero h1 { font-size: clamp(4.6rem, 17vw, 6.6rem); line-height: .82; letter-spacing: -.055em; }
-  .hero-date { margin-top: 1.55rem; font-size: 1.28rem; }
-  .hero-note { max-width: 72%; font-size: 1.03rem; }
-  .hero-tulip { width: clamp(145px, 45vw, 210px); max-height: 48%; right: -1%; bottom: 2%; top: auto; }
-  .hero-edition { right: 1rem; bottom: .6rem; font-size: .55rem; }
-
-  .intro-paints { left: -20%; top: 44%; width: 170px; height: 48%; opacity: .5; }
-  .intro-copy .section-kicker { font-size: .88rem; }
-  .intro-copy .section-title { font-size: 2.65rem; }
-  .intro-lead { font-size: 1.02rem; }
-  .intro-dates p, .intro-request, .intro-signature { font-size: .98rem; }
-
-  .calendar-title { margin-bottom: 1rem; }
-  .calendar { font-size: 1.12rem; }
-  .calendar th, .calendar td { padding: .6rem .05rem; }
-  .calendar-events { grid-template-columns: 1fr; gap: .55rem; margin-top: 1.4rem; }
-  .calendar-events p { justify-content: flex-start; text-align: left; font-size: .98rem; }
-  .calendar-event-date { min-width: 2rem; font-size: 1.4em; }
-  .calendar-tulips { left: -4rem; bottom: -3%; width: 120px; opacity: .8; }
-  .calendar-paint { right: -4rem; top: 16%; width: 100px; height: 62%; opacity: .9; }
-
-  .event-section { padding: 4.6rem 1.15rem 4.5rem; }
-  .event-date-label { font-size: 2.2rem; }
-  .event-title { font-size: 3.2rem; }
-  .event-meta { font-size: 1.32rem; }
-  .address-link { font-size: .98rem; line-height: 1.42; }
-  .registry-cluster { top: 7%; right: -16%; width: 180px; height: 200px; opacity: .8; }
-  .registry-bouquet { top: 30%; right: -23%; width: 125px; opacity: .88; }
-  .event-icons { gap: .65rem; margin: 2.25rem auto 1.45rem; }
-  .icon-tile { flex-basis: 58px; width: 58px; }
-  .event-description { font-size: 1.04rem; text-align: left; margin-bottom: 2.5rem; }
-  .schedule-block { margin-bottom: 2.4rem; }
-  .schedule-title { font-size: 2rem; }
-  .schedule-list { gap: .7rem; }
-  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: minmax(110px, .48fr) 1fr; gap: .65rem; font-size: .93rem; }
-  .schedule-list dt { white-space: normal; }
-  .photo-strip { display: flex; gap: .85rem; overflow-x: auto; margin-inline: -1.15rem; padding: 0 1.15rem .5rem; scroll-snap-type: x mandatory; scrollbar-color: rgba(53,31,17,.5) transparent; }
-  .photo-strip figure { flex: 0 0 82%; scroll-snap-align: center; }
-  .photo-strip img, .banquet-gallery img { height: 270px; }
-  .registry-paint-bottom { height: 125px; bottom: -3rem; }
-  .registry-paint-bottom .paint { width: 42%; }
-  .banquet-paint-cluster { right: -22%; top: 0; width: 185px; height: 260px; opacity: .65; }
-  .schedule-flowers { width: 90px; right: -1rem; top: -3rem; opacity: .85; }
-
-  .details-content > .section-title { margin-bottom: 3rem; }
-  .detail-topic { margin-bottom: 3.3rem; gap: 1.1rem; }
-  .detail-title { font-size: 2.25rem; }
-  .detail-topic p { font-size: .98rem; }
-  .transfer-topic { padding-bottom: .5rem; }
-  .map-grid { grid-template-columns: 1fr; gap: 1.1rem; margin-top: 1.4rem; }
-  .map-card { padding: .55rem; }
-  .map-caption { font-size: .98rem; }
-  .map-card img { height: 235px; }
-  .train-link { font-size: .9rem; text-align: left; }
-  .transfer-paint { width: 72px; height: 37%; right: -2.2rem; top: 42%; opacity: .75; }
-  .dresscode-topic { display: block; padding-right: 0; min-height: auto; padding-bottom: 125px; }
-  .palette-image { display: block; width: min(76%, 255px); margin: .8rem auto 0; max-height: 235px; }
-  .dresscode-paint { width: 83px; height: 155px; right: -1.6rem; top: auto; bottom: -1rem; }
-  .gifts-topic, .overnight-topic { display: block; padding-right: 0; padding-bottom: 1rem; min-height: auto; }
-  .gift-icon, .bed-icon { position: relative; display: block; width: 78px; height: 78px; right: auto; top: auto; margin: 1rem 0 0 auto; }
-  .gift-blue-paint { width: 70px; height: 170px; right: -1.4rem; top: auto; bottom: -2rem; }
-  .gift-red-paint { width: 115px; height: 42px; right: 3rem; bottom: -1rem; }
-  .overnight-paint-top, .overnight-paint-bottom { width: 120px; height: 46px; right: -1.2rem; }
-
-  .rsvp-section { padding: 1rem .25rem 4.3rem; }
-  .rsvp-shell { width: 100%; padding: 4rem 6vw; }
-  .rsvp-card { padding: 1.1rem .95rem 1.35rem; border-radius: 16px; }
-  .rsvp-card h2 { font-size: 2.65rem; margin-bottom: 1.35rem; border-radius: 8px; }
-  .question { margin-bottom: 1.2rem; }
-  .question legend { font-size: 1.12rem; }
-  .choice { font-size: .85rem; }
-  .drinks-grid { grid-template-columns: 1fr; }
-  .question input[type="text"], .question textarea { font-size: .84rem; }
-  .submit-button { width: 80%; font-size: 1.1rem; }
-
-  .site-footer { min-height: 600px; padding: 4.5rem 1.15rem 16rem; }
-  .footer-question { grid-template-columns: 1fr auto; gap: 1rem; min-height: 190px; }
-  .footer-copy .detail-title { font-size: 2.2rem; }
-  .footer-copy p { font-size: .96rem; }
-  .question-icon { width: 65px; height: 65px; }
-  .footer-paint { width: 80%; height: 65px; left: -5%; bottom: -7%; }
-  .footer-closing { margin-top: 2.6rem; font-size: 2rem; }
-  .footer-signature { font-size: 2.5rem; }
-  .bouquet-collage { bottom: -3.7rem; height: 260px; }
-  .footer-bouquet { max-width: 60%; }
-  .bouquet-one { left: -13%; width: 47%; }
-  .bouquet-two { left: 12%; width: 53%; }
-  .bouquet-three { right: 8%; width: 50%; }
-  .bouquet-four { right: -15%; width: 48%; }
-}
-
-@media (max-width: 380px) {
-  .hero { min-height: 600px; }
-  .hero h1 { font-size: 4.25rem; }
-  .hero-tulip { width: 145px; right: -9px; }
-  .event-date-label { font-size: 1.95rem; }
-  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: 1fr; gap: .05rem; }
-  .rsvp-shell { padding-inline: 4vw; }
-  .rsvp-card { padding-inline: .75rem; }
-}
-
-/* The full floral wreath has its natural proportions on wide screens. On phones
-   its edge crops are arranged separately so the flowers do not become stretched. */
-.rsvp-frame-mobile { display: none; }
-@media (max-width: 640px) {
-  .rsvp-frame-desktop { display: none; }
-  .rsvp-frame-mobile { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-  .frame-mobile-edge { position: absolute; display: block; max-width: none; pointer-events: none; }
-  .frame-mobile-top, .frame-mobile-bottom { left: -8%; width: 116%; height: auto; }
-  .frame-mobile-top { top: 0; }
-  .frame-mobile-bottom { bottom: 0; }
-  .frame-mobile-left, .frame-mobile-right { top: 55px; bottom: 55px; width: clamp(68px, 21vw, 88px); height: calc(100% - 110px); object-fit: cover; }
-  .frame-mobile-left { left: -1.5%; }
-  .frame-mobile-right { right: -1.5%; }
-}
-
-
-
-/* =========================================
-   ФИНАЛЬНЫЕ ПРАВКИ И АДАПТАЦИЯ
-   ========================================= */
-
-/* Навигация — по центру, без названия слева */
-.site-header {
-  justify-content: center;
-}
-
-.brand {
-  display: none;
-}
-
-.main-nav {
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Календарь: отдельные мазки для 26 и 27 февраля */
-.date-highlight {
-  color: var(--chocolate);
-  text-decoration: underline;
-  text-decoration-color: var(--chocolate);
-  text-decoration-thickness: 1px;
-  text-underline-offset: .18em;
-}
-
-.date-highlight::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -17% -24%;
-  background-position: center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-.date-highlight-blue::before {
-  background-image: url("images/paints/blue_1.webp");
-  transform: rotate(15deg);
-}
-
-.date-highlight-lime::before {
-  background-image: url("images/paints/lime_1.webp");
-  transform: rotate(15deg);
-}
-
-.date-highlight-blue,
-.date-highlight-lime {
-  color: var(--chocolate);
-}
-
-/* Блоки 1 и 2 — меньше пустого пространства */
-.hero {
-  min-height: clamp(540px, calc(100svh - 76px), 760px);
-}
-
-.intro.section-padded {
-  padding-top: clamp(2.5rem, 5vw, 4.5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-}
-
-/* Подпись «Спасибо за понимание» */
-.thanks-note {
-  margin-block: .4rem !important;
-  line-height: 1.2;
-  text-align: left;
-}
-
-/* Палитра дресс-кода: увеличить на 15% и сдвинуть вправо */
-.palette-image {
-  flex-basis: clamp(178px, 28.75vw, 345px);
-  width: clamp(178px, 28.75vw, 345px);
-  max-height: 310px;
-  margin-left: auto;
-  transform: translateX(12%);
-}
-
-/* Анкета — сократить интервалы сверху и снизу */
-.details-content > .detail-topic:last-child {
-  margin-bottom: 1.5rem;
-}
-
-.rsvp-section {
-  padding-top: .75rem;
-  padding-bottom: clamp(2rem, 4vw, 3.5rem);
-}
-
-.rsvp-shell {
-  padding-top: clamp(3rem, 6vw, 5rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-}
-
-/* Мобильная версия */
-@media (max-width: 900px) {
-  .site-header {
-    justify-content: center;
-  }
-
-  .main-nav {
-    justify-content: center;
-    gap: clamp(.7rem, 2vw, 1.2rem);
-  }
-}
-
-@media (max-width: 640px) {
-  /* Компактная центральная навигация */
-  .site-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    min-height: auto;
-    padding: .55rem .5rem;
-  }
-
-  .brand {
-    display: none;
-  }
-
-  .main-nav {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: .25rem .85rem;
-    overflow: visible;
-    padding: .2rem 0;
-  }
-
-  .main-nav a {
-    flex: 0 1 auto;
-    font-size: .75rem;
-    letter-spacing: .025em;
-  }
-
-  html {
-    scroll-padding-top: 70px;
-  }
-
-  /* Убираем излишние отступы между первым и вторым блоками */
-  .hero {
-    min-height: clamp(520px, 82svh, 630px);
-    padding-bottom: 2.5rem;
-  }
-
-  .intro.section-padded {
-    padding: 2.8rem 1.15rem 3.2rem;
-  }
-
-  /* Палитра не выходит за край экрана */
-  .dresscode-topic {
-    overflow: visible;
-  }
-
-  .palette-image {
-    width: min(82%, 280px);
-    flex-basis: auto;
-    max-height: 250px;
-    margin: .8rem 0 0 auto;
-    transform: none;
-  }
-
-  /* Компактнее переход к анкете */
-  .details-content > .detail-topic:last-child {
-    margin-bottom: 1.2rem;
-  }
-
-  .rsvp-section {
-    padding: .5rem .25rem 2.5rem;
-  }
-
-  .rsvp-shell {
-    padding: 3rem 6vw;
-  }
-}
-
-@media (max-width: 380px) {
-  .main-nav {
-    column-gap: .6rem;
-  }
-
-  .main-nav a {
-    font-size: .7rem;
-  }
-
-  .intro.section-padded {
-    padding-inline: 1rem;
-  }
-
-  .rsvp-shell {
-    padding-inline: 4vw;
-  }
-}
-
-/* 27 февраля — красный текст */
-.date-highlight-lime {
-  color: #c62828;
-  text-decoration-color: #c62828;
-}
-
-
-/* Final visual refinements: supplied company art, single footer collage,
-   gentle section fades and subtle flower parallax. */
-.company-image {
-  position: absolute;
-  z-index: 1;
-  right: -1.5%;
-  top: 50%;
-  width: clamp(105px, 13vw, 175px);
-  max-height: 230px;
-  object-fit: contain;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-.dresscode-topic { padding-right: clamp(125px, 17vw, 220px); }
-.palette-image { margin-left: auto; transform: translateX(10%) scale(1.15); transform-origin: center right; }
-
-/* One unified footer image replaces the separate bouquet elements. */
-.bouquet-collage { bottom: -8rem; height: clamp(280px, 32vw, 450px); }
-.footer-foot {
-  position: absolute;
-  left: 50%;
-  bottom: -2%;
-  width: min(112%, 1800px);
-  max-width: none;
-  height: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  transform: translateX(-50%);
-  transform-origin: center bottom;
-}
-
-/* Soft gradients blend adjacent block backgrounds without changing layout. */
-.registry-section {
-  background-image: linear-gradient(to bottom, #FFFBE9 0%, #C4E5FF 18%, #C4E5FF 100%);
-}
-.banquet-section {
-  background-image: linear-gradient(to bottom, #C4E5FF 0%, #8699F2 18%, #8699F2 82%, #FFFBE9 100%);
-}
-.details-section {
-  background-image: linear-gradient(to bottom, #8699F2 0%, #FFFBE9 16%, #FFFBE9 100%);
-}
-
-@media (max-width: 640px) {
-  .dresscode-topic { padding-right: 0; padding-bottom: 130px; }
-  .palette-image { width: min(68%, 230px); margin: .8rem 0 0 auto; transform: translateX(4%) scale(1.15); }
-  .company-image { right: -1rem; top: auto; bottom: -1.5rem; width: 105px; max-height: 145px; transform: none; }
-  .bouquet-collage { bottom: -3.7rem; height: 250px; }
-  .footer-foot { width: 130%; height: 100%; bottom: -2%; }
-  .registry-section { background-image: linear-gradient(to bottom, #FFFBE9 0%, #C4E5FF 14%, #C4E5FF 100%); }
-  .banquet-section { background-image: linear-gradient(to bottom, #C4E5FF 0%, #8699F2 12%, #8699F2 88%, #FFFBE9 100%); }
-  .details-section { background-image: linear-gradient(to bottom, #8699F2 0%, #FFFBE9 12%, #FFFBE9 100%); }
-}
+/* Телефон и планшет показывают ту же раскладку, что и компьютер:
+   ширина макета фиксируется в index.html (meta viewport width=1200), поэтому отдельных мобильных правил нет. */
