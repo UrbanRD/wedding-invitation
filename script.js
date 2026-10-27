@@ -7,8 +7,6 @@
   "use strict";
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyR1C7wJycqJynC3PTH-xHTQH3SD_qeUduggcram5ipf7fzGV5EleZRRiGUkeSWgXDNg/exec"; // Example: https://script.google.com/macros/s/DEPLOYMENT_ID/exec
   document.documentElement.classList.add("js-enabled");
-  // The phone shows exactly the desktop layout (same as <meta name="viewport" content="width=1200"> in index.html).
-  document.querySelector('meta[name="viewport"]')?.setAttribute("content", "width=1200");
 
   // Soft reveal animations. If IntersectionObserver is unavailable, content remains visible.
   const revealElements = document.querySelectorAll(".reveal");
