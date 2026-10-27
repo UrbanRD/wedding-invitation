@@ -508,13 +508,11 @@ button, input, textarea, select { color-scheme: light; }
   .rsvp-shell { width: 100%; padding: 4rem 6vw; }
   /* Рамка: на телефоне — отдельные фрагменты венка, чтобы цветы не сжимались */
  
-  @media (max-width: 640px) {
   .rsvp-shell { padding: 4rem 6vw; }
   .rsvp-frame {
     object-fit: fill;   /* растягиваем по высоте формы */
     transform: none;    /* scale(1.15) был рассчитан на десктоп */
   }
-}
   
   .rsvp-card { padding: 1.25rem 1.1rem 1.5rem; border-radius: 16px; }
   .rsvp-card h2 { margin-bottom: 1.4rem; font-size: 2.5rem; border-radius: 8px; }
