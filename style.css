@@ -497,6 +497,7 @@ button, input, textarea, select { color-scheme: light; }
   .company-image {
     width: 100%;                                /* было 92 % — это максимум без обрезки */
     height: var(--company-h);                   /* было clamp(220px, 60vw, 290px) → ×2 */
+    bottom: -5rem
   }
 }
   .gifts-topic, .overnight-topic { display: block; min-height: 0; padding: 0 0 1rem; }
