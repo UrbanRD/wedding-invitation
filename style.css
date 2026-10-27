@@ -307,7 +307,6 @@ button, input, textarea, select { color-scheme: light; }
 .form-status.is-error { color: #FFC3C3; }
 .question.is-invalid legend { text-decoration: underline; text-decoration-color: #FFC3C3; text-decoration-thickness: 2px; text-underline-offset: .18em; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
 /* 8 — footer */
 .site-footer { position: relative; max-height: 1600px; padding: clamp(4rem, 9vw, 8rem) clamp(1.2rem, 5vw, 5rem) 21rem; overflow: visible; isolation: isolate; }
 .footer-content { max-width: 1050px; }
