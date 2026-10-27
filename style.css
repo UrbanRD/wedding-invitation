@@ -435,7 +435,7 @@ button, input, textarea, select { color-scheme: light; }
   .hero h1 { font-size: clamp(4.4rem, 19vw, 6.6rem); line-height: .82; }
   .hero-date { margin-top: 1.6rem; font-size: 1.4rem; }
   .hero-note { max-width: 58%; font-size: 1.15rem; line-height: 1.4; }
-  .hero-tulip { top: auto; bottom: 3%; right: 1%; width: clamp(150px, 44vw, 220px); max-height: 46%; }
+  .hero-tulip { top: auto; top: 3%; right: 1%; width: clamp(150px, 44vw, 220px); max-height: 46%; }
   .hero-edition { right: 1rem; bottom: .6rem; font-size: .6rem; }
 
   .intro { padding-block: 3rem 3.5rem; }
