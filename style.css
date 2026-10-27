@@ -165,7 +165,7 @@ button, input, textarea, select { color-scheme: light; }
 .date-highlight-blue::before { background-image: url("images/paints/blue_1.webp"); }
 .date-highlight-lime::before { background-image: url("images/paints/lime_1.webp"); }
 .date-highlight-lime { color: #c62828; }
-.calendar-events { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; margin-left: 2rem; }
+.calendar-events { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; margin-left: 3rem; }
 .calendar-events p { display: flex; align-items: baseline; justify-content: center; gap: .8rem; margin: 0; text-align: center; }
 .calendar-event-date { font-family: var(--heading-font); font-size: 1.6em; white-space: nowrap; }
 .calendar-tulips { position: absolute; z-index: -1; left: -6%; bottom: 3%; width: clamp(220px, 17vw, 330px); transform: rotate(45deg); }
@@ -447,7 +447,7 @@ button, input, textarea, select { color-scheme: light; }
   .calendar-title { margin-bottom: 1rem; }
   .calendar { font-size: 1.15rem; }
   .calendar th, .calendar td { padding: .6rem .05rem; }
-  .calendar-events { grid-template-columns: 1fr; gap: .6rem; margin-top: 1.5rem; margin-left: 2rem; margin-left: 2rem;}
+  .calendar-events { grid-template-columns: 1fr; gap: .6rem; margin-top: 1.5rem; margin-left: 2rem; margin-left: 3rem;}
   .calendar-events p { justify-content: flex-start; text-align: left; font-size: 1.05rem; }
   .calendar-event-date { min-width: 2.2rem; font-size: 1.4em; }
   .calendar-tulips { left: -4rem; bottom: -6%; width: 130px; opacity: .85; }
