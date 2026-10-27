@@ -346,5 +346,28 @@ button, input, textarea, select { color-scheme: light; }
   .js-enabled .reveal { opacity: 1; transform: none; }
 }
 
-/* Телефон и планшет показывают ту же раскладку, что и компьютер:
-   ширина макета фиксируется в index.html (meta viewport width=1200), поэтому отдельных мобильных правил нет. */
+
+@media (max-width: 900px) {
+  .site-header { gap: 1rem; min-height: 68px; padding-inline: 1.1rem; }
+  .main-nav { gap: clamp(.8rem, 2vw, 1.3rem); }
+  .main-nav a { font-size: .95rem; letter-spacing: .04em; }
+  .hero { grid-template-columns: 1fr .7fr; padding-inline: 6vw; }
+  .hero-tulip { right: 5%; width: clamp(150px, 30vw, 290px); }
+  .intro-paints { opacity: .65; }
+  .calendar-tulips { left: -9%; width: 160px; }
+  .calendar-paint { right: -10%; }
+  .registry-bouquet { right: -10%; width: 180px; }
+  .schedule-flowers { right: -12%; width: 140px; }
+  .rsvp-shell { padding-inline: clamp(8rem, 18vw, 12rem); }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 18px; line-height: 1.48; }
+  .site-header { min-height: 62px; display: block; padding: .55rem .6rem .45rem; }
+  .brand { display: block; width: max-content; margin: 0 auto .35rem; font-size: .9rem; }
+  .main-nav { justify-content: flex-start; gap: 1.2rem; overflow-x: auto; padding: .15rem .35rem .28rem; scrollbar-width: none; }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav a { flex: 0 0 auto; font-size: .82rem; }
+  html { scroll-padding-top: 88px; }
+  .section-padded { padding: 4.5rem 1.15rem; }
+  .section-title { font-size: clamp(2.8rem, 12vw, 4rem); margin-bottom: 1.35rem; }
