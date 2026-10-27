@@ -46,12 +46,3 @@ py -m http.server 8000
 7. Сохраните `script.js` в репозитории и проверьте тестовую отправку. В папке Drive должен появиться текстовый файл с именем гостя; внутри будут записаны вопросы и ответы.
 
 Поскольку веб-приложение принимает общедоступные POST-запросы, адрес отправки не следует считать закрытым API. При необходимости до рассылки гостям можно добавить дополнительную защиту от спама.
-
-
-## Final visual update
-
-- Added the `company.png` illustration beside the dress-code text.
-- Replaced the separate footer bouquet elements with one transparent composite image, `images/foot.webp`, assembled from the bouquet assets included in the archive (the original archive did not contain a separate `foot` asset).
-- Increased the RSVP frame scale and added soft gradient transitions between colored sections.
-- Added subtle scroll parallax to the flower illustrations.
-- Updated the dress-code layout for narrow screens while retaining the same content order and visual hierarchy.
