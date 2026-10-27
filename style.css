@@ -358,140 +358,147 @@ button, input, textarea, select { color-scheme: light; }
   .rsvp-card h2, .question input[type="text"], .question textarea, .submit-button { background-color: #FFFBE9; }
 }
 
-@media (max-width: 900px) {
-  .site-header { gap: 1rem; min-height: 68px; padding-inline: 1.1rem; }
-  .main-nav { gap: clamp(.8rem, 2vw, 1.3rem); }
-  .main-nav a { font-size: .95rem; letter-spacing: .04em; }
-  .hero { grid-template-columns: 1fr .7fr; padding-inline: 6vw; }
-  .hero-tulip { right: 5%; width: clamp(150px, 30vw, 290px); }
-  .intro-paints { opacity: .65; }
-  .calendar-tulips { left: -9%; width: 160px; }
-  .calendar-paint { right: -10%; }
-  .registry-bouquet { right: -10%; width: 180px; }
-  .schedule-flowers { right: -12%; width: 140px; }
-  .rsvp-shell { padding-inline: clamp(8rem, 18vw, 12rem); }
+/* ===== Планшет и телефон: положение картинок как на компьютере, текст крупнее и не перекрывается ===== */
+
+/* Небольшие ноутбуки и планшеты горизонтально */
+@media (max-width: 1199px) {
+  .palette-image { right: 0; }
+  .registry-bouquet { right: -18%; width: clamp(380px, 40vw, 480px); }
 }
 
+/* Планшет */
+@media (max-width: 900px) {
+  html, body { overflow-x: clip; }
+  body { font-size: 18px; line-height: 1.55; }
+  .site-header { gap: 1rem; min-height: 68px; padding-inline: 1.1rem; }
+  .main-nav { gap: clamp(1rem, 3vw, 1.6rem); }
+  .main-nav a { font-size: 1rem; letter-spacing: .05em; }
+  .section-padded { padding: 5rem clamp(1.5rem, 5vw, 2.5rem); }
+
+  .hero { grid-template-columns: 1fr .7fr; padding-inline: 6vw; }
+  .hero-note { max-width: 25rem; font-size: 1.2rem; }
+  .hero-tulip { right: 4%; width: clamp(170px, 32vw, 290px); }
+  .hero-paint { right: 4%; width: clamp(130px, 20vw, 180px); }
+
+  .intro-paints { opacity: .6; }
+  .intro-lead, .intro-dates p, .intro-request, .intro-signature { font-size: 1.15rem; }
+  .calendar-tulips { left: -9%; width: 190px; }
+  .calendar-paint { right: -10%; }
+
+  .event-section { padding: 5rem clamp(1.5rem, 5vw, 2.5rem); }
+  .registry-cluster { right: -4%; }
+  .registry-bouquet { top: 38%; right: -20%; width: 330px; }
+  .event-description, .schedule-list > div { font-size: 1.15rem; }
+  .banquet-paint-cluster { right: -8%; opacity: .8; }
+  .photo-strip img, .banquet-gallery img { height: clamp(240px, 38vw, 330px); }
+
+  .detail-topic p, .thanks-note { font-size: 1.15rem; }
+  /* Дресс-код: палитра справа сверху, company — по центру под текстом, место под неё зарезервировано */
+  .dresscode-topic { min-height: 0; padding-right: calc(clamp(150px, 28vw, 230px) + 1.5rem); padding-bottom: clamp(260px, 50vw, 400px); }
+  .dresscode-topic .detail-copy { position: static; }
+  .palette-image { width: clamp(150px, 28vw, 230px); height: clamp(150px, 28vw, 230px); }
+  .company-image { left: 50%; bottom: 0; width: min(75%, 440px); height: clamp(240px, 46vw, 380px); max-height: none; }
+  .gifts-topic, .overnight-topic { padding-right: clamp(110px, 20vw, 170px); }
+
+  .rsvp-shell { padding-inline: clamp(7rem, 16vw, 10rem); }
+  .question legend { font-size: 1.25rem; }
+  .choice { font-size: 1rem; line-height: 1.4; }
+  .choice input { width: 1.2rem; height: 1.2rem; margin-top: .1rem; }
+  .question input[type="text"], .question textarea { font-size: 16px; }
+  .field-hint, .form-required-note { font-size: .85rem; }
+  .form-status { font-size: .95rem; }
+
+  .footer-copy p { font-size: 1.15rem; }
+  .footer-paint { height: 95vw; top: calc(-10% - 47.5vw); }
+  /* Коллаж foot: то же смещение и ширина, что на компьютере, низ привязан к краю подвала */
+  .site-footer { padding-bottom: clamp(14rem, 48vw, 21rem); }
+  .bouquet-collage { bottom: 0; translate: -50% 25%; }
+}
+
+/* Телефон */
 @media (max-width: 640px) {
-  body { font-size: 18px; line-height: 1.48; }
-  .site-header { min-height: 62px; display: block; padding: .55rem .6rem .45rem; }
-  .brand { display: block; width: max-content; margin: 0 auto .35rem; font-size: .9rem; }
-  .main-nav { justify-content: flex-start; gap: 1.2rem; overflow-x: auto; padding: .15rem .35rem .28rem; scrollbar-width: none; }
+  html { scroll-padding-top: 96px; }
+  body { font-size: 17.5px; }
+  .site-header { display: block; min-height: 62px; padding: .55rem .6rem .35rem; }
+  .brand { display: block; width: max-content; margin: 0 auto .2rem; font-family: var(--heading-font); font-size: 1.05rem; letter-spacing: .06em; text-decoration: none; }
+  .main-nav { flex-wrap: nowrap; justify-content: flex-start; gap: 1.3rem; overflow-x: auto; padding: 0 .5rem .1rem; scrollbar-width: none; }
   .main-nav::-webkit-scrollbar { display: none; }
-  .main-nav a { flex: 0 0 auto; font-size: .82rem; }
-  html { scroll-padding-top: 88px; }
-  .section-padded { padding: 4.5rem 1.15rem; }
-  .section-title { font-size: clamp(2.8rem, 12vw, 4rem); margin-bottom: 1.35rem; }
+  .main-nav a { flex: 0 0 auto; padding: .5rem 0; font-size: .95rem; }
+  .section-padded { padding: 4.5rem 1.25rem; }
+  .section-title { margin-bottom: 1.35rem; font-size: clamp(2.6rem, 11vw, 3.6rem); }
+  .section-kicker, .eyebrow { font-size: 1rem; }
 
-  .hero { min-height: 630px; display: block; padding: 5.2rem 1.2rem 3.5rem; }
-  .hero-paint { width: 90px; left: -1.7rem; top: -3rem; height: 60%; transform: rotate(2deg); }
-  .hero-copy { margin: 0; width: 100%; max-width: 100%; }
-  .hero-eyebrow { font-size: .95rem; margin-bottom: 1.3rem; }
-  .hero h1 { font-size: clamp(4.6rem, 17vw, 6.6rem); line-height: .82; letter-spacing: -.055em; }
-  .hero-date { margin-top: 1.55rem; font-size: 1.28rem; }
-  .hero-note { max-width: 72%; font-size: 1.03rem; }
-  .hero-tulip { width: clamp(145px, 45vw, 210px); max-height: 48%; right: -1%; bottom: 2%; top: auto; }
-  .hero-edition { right: 1rem; bottom: .6rem; font-size: .55rem; }
+  .hero { display: block; min-height: 640px; padding: 4.5rem 1.25rem 3.5rem; }
+  .hero-paint { right: 6%; top: -4%; width: 110px; height: 78%; }
+  .hero-copy { width: 100%; max-width: 100%; margin: 0; }
+  .hero-eyebrow { margin-bottom: 1.3rem; }
+  .hero h1 { font-size: clamp(4.4rem, 19vw, 6.6rem); line-height: .82; }
+  .hero-date { margin-top: 1.6rem; font-size: 1.4rem; }
+  .hero-note { max-width: 58%; font-size: 1.15rem; line-height: 1.4; }
+  .hero-tulip { top: auto; bottom: 3%; right: 1%; width: clamp(150px, 44vw, 220px); max-height: 46%; }
+  .hero-edition { right: 1rem; bottom: .6rem; font-size: .6rem; }
 
-  .intro-paints { left: -20%; top: 44%; width: 170px; height: 48%; opacity: .5; }
-  .intro-copy .section-kicker { font-size: .88rem; }
-  .intro-copy .section-title { font-size: 2.65rem; }
-  .intro-lead { font-size: 1.02rem; }
-  .intro-dates p, .intro-request, .intro-signature { font-size: .98rem; }
+  .intro { padding-block: 3rem 3.5rem; }
+  .intro-paints { left: -12%; top: 6%; width: 150px; height: 50%; opacity: .4; }
+  .intro-copy .section-title { font-size: clamp(2.3rem, 10vw, 2.9rem); }
+  .intro-lead, .intro-dates p, .intro-request, .intro-signature { font-size: 1.1rem; }
+  .intro-lead { text-align: left; }
 
   .calendar-title { margin-bottom: 1rem; }
-  .calendar { font-size: 1.12rem; }
+  .calendar { font-size: 1.15rem; }
   .calendar th, .calendar td { padding: .6rem .05rem; }
-  .calendar-events { grid-template-columns: 1fr; gap: .55rem; margin-top: 1.4rem; }
-  .calendar-events p { justify-content: flex-start; text-align: left; font-size: .98rem; }
-  .calendar-event-date { min-width: 2rem; font-size: 1.4em; }
-  .calendar-tulips { left: -4rem; bottom: -3%; width: 120px; opacity: .8; }
-  .calendar-paint { right: -4rem; top: 16%; width: 100px; height: 62%; opacity: .9; }
+  .calendar-events { grid-template-columns: 1fr; gap: .6rem; margin-top: 1.5rem; }
+  .calendar-events p { justify-content: flex-start; text-align: left; font-size: 1.05rem; }
+  .calendar-event-date { min-width: 2.2rem; font-size: 1.4em; }
+  .calendar-tulips { left: -4rem; bottom: -2%; width: 130px; opacity: .85; }
+  .calendar-paint { right: -3.5rem; top: 14%; width: 100px; height: 62%; opacity: .85; }
 
-  .event-section { padding: 4.6rem 1.15rem 4.5rem; }
-  .event-date-label { font-size: 2.2rem; }
+  .event-section { padding: 4.5rem 1.25rem; }
+  .event-date-label { font-size: 2.1rem; }
   .event-title { font-size: 3.2rem; }
-  .event-meta { font-size: 1.32rem; }
-  .address-link { font-size: .98rem; line-height: 1.42; }
-  .registry-cluster { top: 7%; right: -16%; width: 180px; height: 200px; opacity: .8; }
-  .registry-bouquet { top: 30%; right: -23%; width: 125px; opacity: .88; }
-  .event-icons { gap: .65rem; margin: 2.25rem auto 1.45rem; }
-  .icon-tile { flex-basis: 58px; width: 58px; }
-  .event-description { font-size: 1.04rem; text-align: left; margin-bottom: 2.5rem; }
+  .event-meta { font-size: 1.35rem; }
+  .address-link { font-size: 1.05rem; line-height: 1.45; }
+  .registry-cluster { top: 3%; right: -18%; width: 170px; height: 190px; opacity: .75; }
+  .registry-bouquet { top: 34%; right: -22%; width: 170px; opacity: .85; }
+  .event-icons { gap: .75rem; margin: 2.25rem auto 1.5rem; }
+  .icon-tile { flex-basis: 60px; width: 60px; }
+  .event-description { margin-bottom: 2.5rem; font-size: 1.1rem; text-align: left; }
   .schedule-block { margin-bottom: 2.4rem; }
   .schedule-title { font-size: 2rem; }
-  .schedule-list { gap: .7rem; }
-  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: minmax(110px, .48fr) 1fr; gap: .65rem; font-size: .93rem; }
+  .schedule-list { gap: .75rem; }
+  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: minmax(105px, .42fr) 1fr; gap: .75rem; font-size: 1.05rem; }
   .schedule-list dt { white-space: normal; }
-  .photo-strip { display: flex; gap: .85rem; overflow-x: auto; margin-inline: -1.15rem; padding: 0 1.15rem .5rem; scroll-snap-type: x mandatory; scrollbar-color: rgba(53,31,17,.5) transparent; }
-  .photo-strip figure { flex: 0 0 82%; scroll-snap-align: center; }
-  .photo-strip img, .banquet-gallery img { height: 270px; }
+  .photo-strip { display: flex; gap: .85rem; overflow-x: auto; margin-inline: -1.25rem; padding: 0 1.25rem .5rem; scroll-snap-type: x mandatory; scrollbar-color: rgba(53,31,17,.5) transparent; }
+  .photo-strip figure { flex: 0 0 84%; scroll-snap-align: center; }
+  .photo-strip img, .banquet-gallery img { height: 290px; }
   .registry-paint-bottom { height: 125px; bottom: -3rem; }
   .registry-paint-bottom .paint { width: 42%; }
-  .banquet-paint-cluster { right: -22%; top: 0; width: 185px; height: 260px; opacity: .65; }
-  .schedule-flowers { width: 90px; right: -1rem; top: -3rem; opacity: .85; }
+  .banquet-paint-cluster { right: -20%; top: 0; width: 190px; height: 270px; opacity: .55; }
 
   .details-content > .section-title { margin-bottom: 3rem; }
-  .detail-topic { margin-bottom: 3.3rem; gap: 1.1rem; }
-  .detail-title { font-size: 2.25rem; }
-  .detail-topic p { font-size: .98rem; }
+  .detail-topic { gap: 1.1rem; margin-bottom: 3.5rem; }
+  .detail-title { font-size: 2.3rem; }
+  .detail-topic p, .thanks-note { font-size: 1.1rem; }
   .transfer-topic { padding-bottom: .5rem; }
-  .map-grid { grid-template-columns: 1fr; gap: 1.1rem; margin-top: 1.4rem; }
-  .map-card { padding: .55rem; }
-  .map-caption { font-size: .98rem; }
-  .map-card img { height: 235px; }
-  .train-link { font-size: .9rem; text-align: left; }
-  .transfer-paint { width: 72px; height: 37%; right: -2.2rem; top: 42%; opacity: .75; }
-  .dresscode-topic { display: block; padding-right: 0; min-height: auto; padding-bottom: 125px; }
-  .palette-image { display: block; width: min(76%, 255px); margin: .8rem auto 0; max-height: 235px; }
-  .dresscode-paint { width: 83px; height: 155px; right: -1.6rem; top: auto; bottom: -1rem; }
-  .gifts-topic, .overnight-topic { display: block; padding-right: 0; padding-bottom: 1rem; min-height: auto; }
-  .gift-icon, .bed-icon { position: relative; display: block; width: 78px; height: 78px; right: auto; top: auto; margin: 1rem 0 0 auto; }
-  .gift-blue-paint { width: 70px; height: 170px; right: -1.4rem; top: auto; bottom: -2rem; }
-  .gift-red-paint { width: 115px; height: 42px; right: 3rem; bottom: -1rem; }
-  .overnight-paint-top, .overnight-paint-bottom { opacity:1; width: 120px; height: 46px; right: -1.2rem; }
+  .map-grid { grid-template-columns: 1fr; gap: 1.1rem; margin-top: 1.5rem; }
+  .map-card { padding: .6rem; }
+  .map-caption { font-size: 1.05rem; }
+  .map-card img { height: 230px; }
+  .map-open { font-size: .95rem; }
+  .train-link { font-size: 1rem; text-align: left; }
+  /* Дресс-код: текст на всю ширину → палитра → company по центру внизу */
+  .dresscode-topic { display: block; padding: 0 0 clamp(230px, 62vw, 300px); }
+  .palette-image { position: relative; right: auto; top: auto; width: min(64%, 240px); height: auto; margin: 1.2rem auto 0; }
+  .company-image { width: 92%; height: clamp(220px, 60vw, 290px); }
+  .gifts-topic, .overnight-topic { display: block; min-height: 0; padding: 0 0 1rem; }
+  .gift-icon, .bed-icon { position: relative; right: auto; top: auto; display: block; width: 78px; height: 78px; margin: 1rem 0 0 auto; }
+  .gift-blue-paint { right: -1.4rem; top: auto; bottom: -2rem; width: 60px; height: 190px; }
+  .gift-red-paint { right: 3rem; bottom: -.5rem; width: 130px; height: 20px; }
+  .overnight-paint-top, .overnight-paint-bottom { right: -1.2rem; width: 80px; height: 130px; }
 
   .rsvp-section { padding: 1rem .25rem 4.3rem; }
   .rsvp-shell { width: 100%; padding: 4rem 6vw; }
-  .rsvp-card { padding: 1.1rem .95rem 1.35rem; border-radius: 16px; }
-  .rsvp-card h2 { font-size: 2.65rem; margin-bottom: 1.35rem; border-radius: 8px; }
-  .question { margin-bottom: 1.2rem; }
-  .question legend { font-size: 1.12rem; }
-  .choice { font-size: .85rem; }
-  .drinks-grid { grid-template-columns: 1fr; }
-  .question input[type="text"], .question textarea { font-size: .84rem; }
-  .submit-button { width: 80%; font-size: 1.1rem; }
-
-  .site-footer { min-height: 600px; padding: 4.5rem 1.15rem 16rem; }
-  .footer-question { grid-template-columns: 1fr auto; gap: 1rem; min-height: 190px; }
-  .footer-copy .detail-title { font-size: 2.2rem; }
-  .footer-copy p { font-size: .96rem; }
-  .question-icon { width: 65px; height: 65px; }
-  .footer-paint { width: 80%; height: 65px; left: -5%; bottom: -7%; }
-  .footer-closing { margin-top: 2.6rem; font-size: 2rem; }
-  .footer-signature { font-size: 2.5rem; }
-  .bouquet-collage { bottom: -3.7rem; height: 260px; }
-  .footer-bouquet { max-width: 60%; }
-  .bouquet-one { left: -13%; width: 47%; }
-  .bouquet-two { left: 12%; width: 53%; }
-  .bouquet-three { right: 8%; width: 50%; }
-  .bouquet-four { right: -15%; width: 48%; }
-}
-
-@media (max-width: 380px) {
-  .hero { min-height: 600px; }
-  .hero h1 { font-size: 4.25rem; }
-  .hero-tulip { width: 145px; right: -9px; }
-  .event-date-label { font-size: 1.95rem; }
-  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: 1fr; gap: .05rem; }
-  .rsvp-shell { padding-inline: 4vw; }
-  .rsvp-card { padding-inline: .75rem; }
-}
-
-/* The full floral wreath has its natural proportions on wide screens. On phones
-   its edge crops are arranged separately so the flowers do not become stretched. */
-.rsvp-frame-mobile { display: none; }
-@media (max-width: 640px) {
+  /* Рамка: на телефоне — отдельные фрагменты венка, чтобы цветы не сжимались */
   .rsvp-frame-desktop { display: none; }
   .rsvp-frame-mobile { display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
   .frame-mobile-edge { position: absolute; display: block; max-width: none; pointer-events: none; }
@@ -501,4 +508,32 @@ button, input, textarea, select { color-scheme: light; }
   .frame-mobile-left, .frame-mobile-right { top: 55px; bottom: 55px; width: clamp(68px, 21vw, 88px); height: calc(100% - 110px); object-fit: cover; }
   .frame-mobile-left { left: -1.5%; }
   .frame-mobile-right { right: -1.5%; }
+  .rsvp-card { padding: 1.25rem 1.1rem 1.5rem; border-radius: 16px; }
+  .rsvp-card h2 { margin-bottom: 1.4rem; font-size: 2.5rem; border-radius: 8px; }
+  .question { margin-bottom: 1.35rem; }
+  .question legend { font-size: 1.2rem; }
+  .choice { gap: .7rem; margin: .5rem 0; }
+  .drinks-grid { grid-template-columns: 1fr; }
+  .submit-button { width: 100%; padding: .85rem 1rem; font-size: 1.15rem; }
+
+  .site-footer { padding: 4.5rem 1.25rem clamp(12rem, 58vw, 16rem); }
+  .footer-question { gap: 1rem; min-height: 190px; }
+  .footer-copy .detail-title { font-size: 2.3rem; }
+  .footer-copy p { font-size: 1.1rem; }
+  .question-icon { width: 70px; height: 70px; }
+  .footer-paint { height: 100vw; top: calc(-10% - 50vw); }
+  .footer-closing { margin-top: 2.6rem; font-size: 2.1rem; }
+  .footer-signature { font-size: 2.6rem; }
+}
+
+/* Маленькие телефоны */
+@media (max-width: 380px) {
+  body { font-size: 17px; }
+  .hero { min-height: 600px; }
+  .hero h1 { font-size: 4.2rem; }
+  .hero-tulip { right: -2%; width: 145px; }
+  .event-date-label { font-size: 1.9rem; }
+  .schedule-list > div, .banquet-schedule .schedule-list > div { grid-template-columns: 1fr; gap: .1rem; }
+  .rsvp-shell { padding-inline: 4vw; }
+  .rsvp-card { padding-inline: .85rem; }
 }
