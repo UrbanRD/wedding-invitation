@@ -449,7 +449,7 @@ button, input, textarea, select { color-scheme: light; }
   .gift-icon, .bed-icon { position: relative; display: block; width: 78px; height: 78px; right: auto; top: auto; margin: 1rem 0 0 auto; }
   .gift-blue-paint { width: 70px; height: 170px; right: -1.4rem; top: auto; bottom: -2rem; }
   .gift-red-paint { width: 115px; height: 42px; right: 3rem; bottom: -1rem; }
-  .overnight-paint-top, .overnight-paint-bottom { width: 120px; height: 46px; right: -1.2rem; }
+  .overnight-paint-top, .overnight-paint-bottom { opacity:1; width: 120px; height: 46px; right: -1.2rem; }
 
   .rsvp-section { padding: 1rem .25rem 4.3rem; }
   .rsvp-shell { width: 100%; padding: 4rem 6vw; }
